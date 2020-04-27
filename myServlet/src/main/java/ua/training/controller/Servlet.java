@@ -1,7 +1,8 @@
 package ua.training.controller;
 
 import ua.training.controller.commands.*;
-import ua.training.model.service.DestinationService;
+import ua.training.model.service.ApplicationService;
+import ua.training.model.service.DestinationPropertyService;
 import ua.training.model.service.UserService;
 
 import javax.servlet.ServletException;
@@ -13,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Servlet extends HttpServlet {
+public class Servlet extends  HttpServlet {
 
     private Map<String, Command> commands = new HashMap<>();
 
@@ -25,7 +26,7 @@ public class Servlet extends HttpServlet {
         commands.put("login",new LoginUserCommand());
         commands.put("logout",new LogoutUserCommand());
         commands.put("registration",new RegistrationCommand(new UserService()));
-        commands.put("findroute",new FindRouteCommand(new DestinationService()));
+        commands.put("findroute",new FindRouteCommand(new DestinationPropertyService(),new ApplicationService()));
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)

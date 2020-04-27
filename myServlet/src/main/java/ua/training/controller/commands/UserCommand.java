@@ -21,12 +21,20 @@ public class UserCommand implements Command{
         String password = session.getAttribute("password").toString();
 
 
+
+
         try {
             User user = userDao.checkLogin(userName, password);
             if (user != null) {
                 if (user.getRole().equals("ROLE_USER")) {
+                    session.setAttribute("iduser",user.getId());
+                    session.setAttribute("firstName",user.getFirstName());
+                    session.setAttribute("lastName",user.getLastName());
                     return "WEB-INF/view/user.jsp";
                 }else {
+                    session.setAttribute("iduser",user.getId());
+                    session.setAttribute("firstName",user.getFirstName());
+                    session.setAttribute("lastName",user.getLastName());
                     return "WEB-INF/view/admin.jsp";
                 }
 

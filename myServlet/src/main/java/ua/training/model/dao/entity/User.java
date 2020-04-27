@@ -1,19 +1,21 @@
 package ua.training.model.dao.entity;
 
-import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 
 
     private int id;
 
-    //@Pattern(regexp = "[A-Z][a-z]{2,20}",message = "lol")
     private String firstName;
 
     private String lastName;
     private String role;
     private String password;
     private String userName;
+
+    private List<DestinationProperty> destinationProperties = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -61,5 +63,13 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public List<DestinationProperty> getDestinationProperties() {
+        return destinationProperties;
+    }
+
+    public void setDestinationProperties(List<DestinationProperty> destinationProperties) {
+        this.destinationProperties = destinationProperties;
     }
 }

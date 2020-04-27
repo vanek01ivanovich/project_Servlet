@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Destination {
+public class DestinationProperty {
     private int idDestination;
+    private int idProperty;
+    private int idTrain;
     private String stationDeparture;
     private String stationArrival;
     private String timeDeparture;
@@ -14,7 +16,7 @@ public class Destination {
     private String dateDeparture;
     private String dateArrival;
     private int price;
-    private List<Train> trains = new ArrayList<>();
+    private List<Train> users = new ArrayList<>();
 
 
     public int getIdDestination() {
@@ -89,11 +91,47 @@ public class Destination {
         this.price = price;
     }
 
-    public List<Train> getTrains() {
-        return trains;
+    public List<Train> getUsers() {
+        return users;
     }
 
-    public void setTrains(List<Train> trains) {
-        this.trains = trains;
+    public void setUsers(List<Train> users) {
+        this.users = users;
+    }
+
+
+
+    public int getIdProperty() {
+        return idProperty;
+    }
+
+    public void setIdProperty(int idProperty) {
+        this.idProperty = idProperty;
+    }
+
+    public int getIdTrain() {
+        return idTrain;
+    }
+
+    public void setIdTrain(int idTrain) {
+        this.idTrain = idTrain;
+    }
+
+    @Override
+    public String toString() {
+        return "DestinationProperty{" +
+                "idDestination=" + idDestination +
+                ", idProperty=" + idProperty +
+                ", idTrain=" + idTrain +
+                ", stationDeparture='" + stationDeparture + '\'' +
+                ", stationArrival='" + stationArrival + '\'' +
+                ", timeDeparture='" + timeDeparture + '\'' +
+                ", timeArrival='" + timeArrival + '\'' +
+                ", dateDepartureFormInput=" + dateDepartureFormInput +
+                ", dateDeparture='" + dateDeparture + '\'' +
+                ", dateArrival='" + dateArrival + '\'' +
+                ", price=" + price +
+                ", users=" + users +
+                '}';
     }
 }

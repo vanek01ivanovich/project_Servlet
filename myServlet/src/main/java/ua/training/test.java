@@ -1,3 +1,4 @@
+/*
 package ua.training;
 
 import ua.training.model.dao.entity.User;
@@ -14,3 +15,4 @@ public class test {
       user.ifPresent(val -> System.out.println(user.get().getFirstName()));
   }
 }
+*/

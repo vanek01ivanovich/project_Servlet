@@ -7,5 +7,5 @@ import java.util.Map;
 
 public interface ObjectMapper<T> {
     T extractFromResultSet(ResultSet resultSet) throws SQLException;
-    T putValuesToMap(Map<Integer,T> emptyEntity,T entity);
+    void putValuesToMap(Map<Integer,T> emptyEntity,T entity);
 }

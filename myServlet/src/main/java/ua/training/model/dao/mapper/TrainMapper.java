@@ -9,11 +9,15 @@ import java.util.Map;
 public class TrainMapper implements ObjectMapper<Train> {
     @Override
     public Train extractFromResultSet(ResultSet resultSet) throws SQLException {
-        return null;
+        Train train = new Train();
+        train.setIdTrain(resultSet.getInt("idtrain"));
+        train.setTrainName(resultSet.getString("train_name"));
+        return train;
     }
 
     @Override
-    public Train putValuesToMap(Map<Integer, Train> emptyEntity, Train entity) {
-        return null;
+    public void putValuesToMap(Map<Integer, Train> entity, Train train) {
+        entity.putIfAbsent(train.getIdTrain(),train);
+
     }
 }

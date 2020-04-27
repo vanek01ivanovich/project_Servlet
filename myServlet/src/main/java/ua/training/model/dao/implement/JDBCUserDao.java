@@ -31,9 +31,12 @@ public class JDBCUserDao implements UserDao {
 
             if(resultSet.next()){
                 user = new User();
+                user.setId(resultSet.getInt("idusers"));
                 user.setUserName(resultSet.getString("user_name"));
                 user.setPassword(resultSet.getString("password"));
                 user.setRole(resultSet.getString("role"));
+                user.setFirstName(resultSet.getString("first_name"));
+                user.setLastName(resultSet.getString("last_name"));
                 if (!encoder.checkPass(password,user.getPassword())){
                     return null;
                 }
