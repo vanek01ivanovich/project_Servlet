@@ -12,28 +12,41 @@ import javax.servlet.http.HttpSession;
 public class UserCommand implements Command{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        DaoFactory factory = DaoFactory.getInstance();
+       /* DaoFactory factory = DaoFactory.getInstance();
         UserDao userDao = factory.createUserDao();
-        BcryptEncoder bcryptEncoder = new BcryptEncoder();
+        BcryptEncoder bcryptEncoder = new BcryptEncoder();*/
 
         HttpSession session = request.getSession();
-        String userName = session.getAttribute("userName").toString();
-        String password = session.getAttribute("password").toString();
+        //String userName = session.getAttribute("userName").toString();
+        //String password = session.getAttribute("password").toString();
+
+        System.out.println("USERCOMMAND = " + session.getAttribute("role"));
 
 
+        if (session.getAttribute("role") == null){
+            return "WEB-INF/view/login.jsp";
+        }
+        else if (session.getAttribute("role").equals("ROLE_USER")){
+
+            return "WEB-INF/view/user.jsp";
+        }else{
+            return "WEB-INF/view/admin.jsp";
+        }
 
 
-        try {
+        /*try {
             User user = userDao.checkLogin(userName, password);
             if (user != null) {
                 if (user.getRole().equals("ROLE_USER")) {
                     session.setAttribute("iduser",user.getId());
                     session.setAttribute("firstName",user.getFirstName());
+                    session.setAttribute("login",true);
                     session.setAttribute("lastName",user.getLastName());
                     return "WEB-INF/view/user.jsp";
                 }else {
                     session.setAttribute("iduser",user.getId());
                     session.setAttribute("firstName",user.getFirstName());
+                    session.setAttribute("login",true);
                     session.setAttribute("lastName",user.getLastName());
                     return "WEB-INF/view/admin.jsp";
                 }
@@ -44,7 +57,7 @@ public class UserCommand implements Command{
             }
         }catch (Exception ex){
             throw new RuntimeException(ex);
-        }
+        }*/
 
 
     }

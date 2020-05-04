@@ -25,7 +25,7 @@
     <a href="?lang=ua">UA</a>
 
     <h1>Admin Login</h1>
-    <form method="post">
+    <form action="/login" method="post">
         <label>UserName:
             <input name="userName">
        </label>

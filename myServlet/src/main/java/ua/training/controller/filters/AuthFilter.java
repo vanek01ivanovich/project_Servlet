@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.Locale;
 
 public class AuthFilter implements Filter {
+
+    private HttpSession session;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -24,44 +27,39 @@ public class AuthFilter implements Filter {
 
         final HttpServletRequest req = (HttpServletRequest) request;
         final HttpServletResponse res = (HttpServletResponse) response;
-
-
+        session = req.getSession();
 
         HttpSession session = req.getSession();
+        System.out.println(session.getAttribute("userName"));
+        System.out.println(session.getAttribute("login"));
 
-        String userName = req.getParameter("userName");
-        String password = req.getParameter("password");
-        String reqUrl = "";
 
-       if (req.getParameter("userName") != null){
 
-            DaoFactory factory = DaoFactory.getInstance();
-            UserDao userDao = factory.createUserDao();
+        //TODO if session login don`t allow user made login only after logout and alert message
 
-            try {
-                User user = userDao.checkLogin(userName, password);
-                if (user != null) {
-                    if (user.getRole().equals("ROLE_USER")) {
-                        reqUrl = "/user";
-                    } else {
-                        reqUrl = "/admin";
-                    }
-                    session.setAttribute("userName",userName);
-                    session.setAttribute("password",password);
 
-                    res.sendRedirect(reqUrl);
-                }else {
-                    filterChain.doFilter(request, response);
-                }
-            }catch (Exception e){
-                throw new RuntimeException(e);
+        String currentUrl = req.getRequestURI();
+       /* System.out.println("HI!");
+        System.out.println("Current url = " + currentUrl);
+        System.out.println("Session login user filter = " + session.getAttribute("login"));
+        System.out.println("Curent = " + (currentUrl.equals("/") || currentUrl.equals("/login")));
+        System.out.println("LOGIN = " + (session.getAttribute("login") != null));*/
+
+        if (!(currentUrl.equals("/") || currentUrl.equals("/login")) && session.getAttribute("login") == null){
+            System.out.println("dcs");
+            res.sendRedirect("/login");
+        }else if ((currentUrl.equals("/") || currentUrl.equals("/login")) && session.getAttribute("login") != null){
+            if (session.getAttribute("role").equals("ROLE_USER")){
+                System.out.println("logout first");
+                res.sendRedirect("/user");
+            }else{
+                System.out.println("logout first");
+                res.sendRedirect("admin");
             }
-
-
-
         }else {
             filterChain.doFilter(request, response);
         }
+
 
     }
 

@@ -42,17 +42,33 @@ public class Servlet extends  HttpServlet {
 
     }
 
+    //TODO button click back after logout disable
+    //TODO right url (/user/findticket)
+    //TODO forbid to redirect from user to admin etc.
+
     private void processRequest(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         String path = request.getRequestURI();
 
+        HttpSession session;
+
         path = path.replaceAll(".*/","");
+
+
+
 
         Command command = commands.get(path);
         String page = command.execute(request,response);
         if (page == null){
-            HttpSession session = request.getSession();
+            session = request.getSession();
             response.sendRedirect(session.getAttribute("redirect").toString());
         }else {
+
+            session = request.getSession();
+            System.out.println("USERNAME = " + session.getAttribute("userName"));
+            System.out.println("LOGIN = " + session.getAttribute("login"));
+            System.out.println("ROLE = " + session.getAttribute("role"));
+
+
             request.getRequestDispatcher(page).forward(request, response);
         }
 

@@ -30,6 +30,7 @@ public class FindRouteCommand implements Command {
             if (!destinationProperties.isEmpty()){
                 System.out.println("NOT EMpty");
                 System.out.println(destinationProperties.get(0).getPrice());
+                System.out.println(destinationProperties.get(1).getPrice());
             }else{
                 System.out.println("EMpty");
             }

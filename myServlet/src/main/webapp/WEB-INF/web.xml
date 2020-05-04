@@ -9,15 +9,32 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+
+
   <filter>
     <filter-name>AuthFilter</filter-name>
     <filter-class>ua.training.controller.filters.AuthFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
-    <url-pattern>/login</url-pattern>
-    <url-pattern>/logout</url-pattern>
+    <url-pattern>/*</url-pattern>
+    <!--logout in order to login again after logout, because url change-->
+   <!-- <url-pattern>/logout</url-pattern>-->
   </filter-mapping>
+
+
+
+
+  <!--<filter>
+    <filter-name>LogoutFilter</filter-name>
+    <filter-class>ua.training.controller.filters.LogoutFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LogoutFilter</filter-name>
+  &lt;!&ndash;  <url-pattern>/logout</url-pattern>&ndash;&gt;
+    &lt;!&ndash;<url-pattern>/logout</url-pattern>&ndash;&gt;
+  </filter-mapping>-->
+
 
   <filter>
     <filter-name>LocaleFilter</filter-name>
