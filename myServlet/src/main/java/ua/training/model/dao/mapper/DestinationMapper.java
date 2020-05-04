@@ -11,6 +11,8 @@ public class DestinationMapper implements ObjectMapper<DestinationProperty> {
     public DestinationProperty extractFromResultSet(ResultSet resultSet) throws SQLException {
         DestinationProperty destinationProperty = new DestinationProperty();
         destinationProperty.setIdDestination(resultSet.getInt("destinations_iddestinations"));
+        destinationProperty.setStationArrivalUA(resultSet.getString("arrivalUA"));
+        destinationProperty.setStationDepartureUA(resultSet.getString("departureUA"));
         destinationProperty.setStationArrival(resultSet.getString("arrival"));
         destinationProperty.setStationDeparture(resultSet.getString("departure"));
         destinationProperty.setIdProperty(resultSet.getInt("idproperty"));

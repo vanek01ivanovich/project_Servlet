@@ -6,13 +6,20 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="messages"/>
 <html>
 <head>
     <title>Title</title>
     <link rel="icon" href="data:,">
 </head>
 <body>
-<h1>Hi User!</h1>
+<h1>
+    <fmt:message key="user.hi"/>
+</h1>
 <a href="/logout">logout</a>
 <a href="/findroute">Find Route</a>
 

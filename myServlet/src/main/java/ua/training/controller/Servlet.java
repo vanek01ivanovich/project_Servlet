@@ -1,5 +1,6 @@
 package ua.training.controller;
 
+
 import ua.training.controller.commands.*;
 import ua.training.model.service.ApplicationService;
 import ua.training.model.service.DestinationPropertyService;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,11 +29,12 @@ public class Servlet extends  HttpServlet {
         commands.put("logout",new LogoutUserCommand());
         commands.put("registration",new RegistrationCommand(new UserService()));
         commands.put("findroute",new FindRouteCommand(new DestinationPropertyService(),new ApplicationService()));
+        commands.put("routes",new RoutesCommnad());
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+       
         processRequest(request,response);
     }
 
@@ -47,13 +50,15 @@ public class Servlet extends  HttpServlet {
     //TODO forbid to redirect from user to admin etc.
 
     private void processRequest(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+
         String path = request.getRequestURI();
 
-        HttpSession session;
+        HttpSession session = request.getSession();
 
         path = path.replaceAll(".*/","");
 
-
+        //System.out.println("PATH = " + path);
+        //System.out.println("Locale = " + session.getAttribute("lang"));
 
 
         Command command = commands.get(path);
@@ -63,10 +68,7 @@ public class Servlet extends  HttpServlet {
             response.sendRedirect(session.getAttribute("redirect").toString());
         }else {
 
-            session = request.getSession();
-            System.out.println("USERNAME = " + session.getAttribute("userName"));
-            System.out.println("LOGIN = " + session.getAttribute("login"));
-            System.out.println("ROLE = " + session.getAttribute("role"));
+
 
 
             request.getRequestDispatcher(page).forward(request, response);

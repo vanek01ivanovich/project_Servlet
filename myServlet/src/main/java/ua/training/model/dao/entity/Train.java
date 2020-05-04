@@ -1,6 +1,6 @@
 package ua.training.model.dao.entity;
 
-import sun.security.krb5.internal.crypto.Des;
+
 
 import java.util.ArrayList;
 import java.util.List;

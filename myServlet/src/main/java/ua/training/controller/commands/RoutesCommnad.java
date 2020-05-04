@@ -1,20 +1,19 @@
 package ua.training.controller.commands;
 
+import ua.training.model.dao.entity.DestinationProperty;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
-public class LogoutUserCommand implements Command{
+public class RoutesCommnad implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-
-            session.removeAttribute("userName");
-            session.removeAttribute("login");
-            session.removeAttribute("role");
-            session.removeAttribute("iduser");
-            return "WEB-INF/view/login.jsp";
-
+        List<?> routes = (List<?>) session.getAttribute("listRoutes");
+        request.setAttribute("listRoutes",routes);
+        return "WEB-INF/view/routes.jsp";
     }
 }

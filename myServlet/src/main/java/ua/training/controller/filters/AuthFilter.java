@@ -30,8 +30,7 @@ public class AuthFilter implements Filter {
         session = req.getSession();
 
         HttpSession session = req.getSession();
-        System.out.println(session.getAttribute("userName"));
-        System.out.println(session.getAttribute("login"));
+
 
 
 
@@ -39,21 +38,17 @@ public class AuthFilter implements Filter {
 
 
         String currentUrl = req.getRequestURI();
-       /* System.out.println("HI!");
-        System.out.println("Current url = " + currentUrl);
-        System.out.println("Session login user filter = " + session.getAttribute("login"));
-        System.out.println("Curent = " + (currentUrl.equals("/") || currentUrl.equals("/login")));
-        System.out.println("LOGIN = " + (session.getAttribute("login") != null));*/
 
-        if (!(currentUrl.equals("/") || currentUrl.equals("/login")) && session.getAttribute("login") == null){
-            System.out.println("dcs");
+
+        if (!(currentUrl.equals("/") || currentUrl.equals("/login") || currentUrl.equals("/registration")) && session.getAttribute("login") == null){
             res.sendRedirect("/login");
-        }else if ((currentUrl.equals("/") || currentUrl.equals("/login")) && session.getAttribute("login") != null){
-            if (session.getAttribute("role").equals("ROLE_USER")){
-                System.out.println("logout first");
+        }else if ((currentUrl.equals("/") || currentUrl.equals("/login") || currentUrl.equals("/registration")) && session.getAttribute("login") != null){
+            User user = (User) session.getAttribute("user");
+            if (user.getRole().equals("ROLE_USER")){
+
                 res.sendRedirect("/user");
             }else{
-                System.out.println("logout first");
+
                 res.sendRedirect("admin");
             }
         }else {

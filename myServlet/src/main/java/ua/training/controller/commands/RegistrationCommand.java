@@ -18,7 +18,7 @@ public class RegistrationCommand implements Command{
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response){
         String userName = request.getParameter("userName");
         HttpSession session = request.getSession();
 

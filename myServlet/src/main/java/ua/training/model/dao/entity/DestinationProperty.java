@@ -9,7 +9,9 @@ public class DestinationProperty {
     private int idProperty;
     private int idTrain;
     private String stationDeparture;
+    private String stationDepartureUA;
     private String stationArrival;
+    private String stationArrivalUA;
     private String timeDeparture;
     private String timeArrival;
     private Date dateDepartureFormInput;
@@ -133,5 +135,21 @@ public class DestinationProperty {
                 ", price=" + price +
                 ", users=" + users +
                 '}';
+    }
+
+    public String getStationDepartureUA() {
+        return stationDepartureUA;
+    }
+
+    public void setStationDepartureUA(String stationDepartureUA) {
+        this.stationDepartureUA = stationDepartureUA;
+    }
+
+    public String getStationArrivalUA() {
+        return stationArrivalUA;
+    }
+
+    public void setStationArrivalUA(String stationArrivaUAl) {
+        this.stationArrivalUA = stationArrivaUAl;
     }
 }

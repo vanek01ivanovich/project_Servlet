@@ -18,6 +18,8 @@ public class LoginUserCommand implements Command {
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
 
+        System.out.println(userName);
+
         if (userName == null || password == null){
             return "WEB-INF/view/login.jsp";
         }
@@ -34,27 +36,28 @@ public class LoginUserCommand implements Command {
 
                 if (user.getRole().equals("ROLE_USER")) {
 
-                    //session.setAttribute("login",true);
-                    //response.sendRedirect("/user");
-                    session.setAttribute("role",user.getRole());
-                    session.setAttribute("userName",user.getUserName());
+
+
                     session.setAttribute("login",true);
+                    session.setAttribute("user",user);
                     session.setAttribute("redirect","/user");
                     System.out.println("found");
-                    //return "WEB-INF/view/user.jsp";
+
+
                 }else {
 
-                    //session.setAttribute("login",true);
-                    //response.sendRedirect("/admin");
-                    session.setAttribute("role",user.getRole());
-                    session.setAttribute("userName",user.getUserName());
+
+
                     session.setAttribute("login",true);
+                    session.setAttribute("user",user);
                     session.setAttribute("redirect","/admin");
-                    //return "WEB-INF/view/admin.jsp";
+
+
                 }
                 return null;
 
             } else {
+
                 System.out.println("not Found");
                 return "WEB-INF/view/login.jsp";
             }

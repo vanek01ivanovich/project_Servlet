@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface DestinationPropertyDao extends GenericDao<DestinationProperty>{
     List<DestinationProperty> findAllByApplication(Application application);
+    List<DestinationProperty> findAllByUkrainianApplication(Application application);
 }

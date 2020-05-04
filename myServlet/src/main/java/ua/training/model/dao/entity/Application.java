@@ -4,7 +4,9 @@ public class Application {
     private int idApplication;
     private int idUser;
     private String departure;
+    private String departureUA;
     private String arrival;
+    private String arrivalUA;
     private String dateDeparture;
 
     public int getIdApplication() {
@@ -45,5 +47,21 @@ public class Application {
 
     public void setDateDeparture(String dateDeparture) {
         this.dateDeparture = dateDeparture;
+    }
+
+    public String getDepartureUA() {
+        return departureUA;
+    }
+
+    public void setDepartureUA(String departureUA) {
+        this.departureUA = departureUA;
+    }
+
+    public String getArrivalUA() {
+        return arrivalUA;
+    }
+
+    public void setArrivalUA(String arrivalUA) {
+        this.arrivalUA = arrivalUA;
     }
 }

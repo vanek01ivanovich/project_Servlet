@@ -17,13 +17,25 @@ public class UserCommand implements Command{
         BcryptEncoder bcryptEncoder = new BcryptEncoder();*/
 
         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
         //String userName = session.getAttribute("userName").toString();
         //String password = session.getAttribute("password").toString();
 
-        System.out.println("USERCOMMAND = " + session.getAttribute("role"));
+        System.out.println("USERCOMMAND = " + user.getRole());
 
 
-        if (session.getAttribute("role") == null){
+        if (user.getRole() == null){
+            return "WEB-INF/view/login.jsp";
+        }
+        else if (user.getRole().equals("ROLE_USER")){
+
+            return "WEB-INF/view/user.jsp";
+        }else{
+            return "WEB-INF/view/admin.jsp";
+        }
+
+        /*if (session.getAttribute("role") == null){
             return "WEB-INF/view/login.jsp";
         }
         else if (session.getAttribute("role").equals("ROLE_USER")){
@@ -31,7 +43,7 @@ public class UserCommand implements Command{
             return "WEB-INF/view/user.jsp";
         }else{
             return "WEB-INF/view/admin.jsp";
-        }
+        }*/
 
 
         /*try {
