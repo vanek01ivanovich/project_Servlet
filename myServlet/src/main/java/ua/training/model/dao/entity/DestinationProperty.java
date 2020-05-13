@@ -8,17 +8,16 @@ public class DestinationProperty {
     private int idDestination;
     private int idProperty;
     private int idTrain;
-    private String stationDeparture;
-    private String stationDepartureUA;
-    private String stationArrival;
-    private String stationArrivalUA;
     private String timeDeparture;
     private String timeArrival;
-    private Date dateDepartureFormInput;
+
     private String dateDeparture;
     private String dateArrival;
     private int price;
-    private List<Train> users = new ArrayList<>();
+    private List<Train> trains = new ArrayList<>();
+
+    private List<Destinations> destinations = new ArrayList<>();
+
 
 
     public int getIdDestination() {
@@ -29,21 +28,7 @@ public class DestinationProperty {
         this.idDestination = idDestination;
     }
 
-    public String getStationDeparture() {
-        return stationDeparture;
-    }
 
-    public void setStationDeparture(String stationDeparture) {
-        this.stationDeparture = stationDeparture;
-    }
-
-    public String getStationArrival() {
-        return stationArrival;
-    }
-
-    public void setStationArrival(String stationArrival) {
-        this.stationArrival = stationArrival;
-    }
 
     public String getTimeDeparture() {
         return timeDeparture;
@@ -61,13 +46,7 @@ public class DestinationProperty {
         this.timeArrival = timeArrival;
     }
 
-    public Date getDateDepartureFormInput() {
-        return dateDepartureFormInput;
-    }
 
-    public void setDateDepartureFormInput(Date dateDepartureFormInput) {
-        this.dateDepartureFormInput = dateDepartureFormInput;
-    }
 
     public String getDateDeparture() {
         return dateDeparture;
@@ -93,13 +72,7 @@ public class DestinationProperty {
         this.price = price;
     }
 
-    public List<Train> getUsers() {
-        return users;
-    }
 
-    public void setUsers(List<Train> users) {
-        this.users = users;
-    }
 
 
 
@@ -119,37 +92,41 @@ public class DestinationProperty {
         this.idTrain = idTrain;
     }
 
+
+
+
+
+
+
+    public List<Train> getTrains() {
+        return trains;
+    }
+
+    public void setTrains(List<Train> trains) {
+        this.trains = trains;
+    }
+
+    public List<Destinations> getDestinations() {
+        return destinations;
+    }
+
+    public void setDestinations(List<Destinations> destinations) {
+        this.destinations = destinations;
+    }
+
     @Override
     public String toString() {
         return "DestinationProperty{" +
                 "idDestination=" + idDestination +
                 ", idProperty=" + idProperty +
                 ", idTrain=" + idTrain +
-                ", stationDeparture='" + stationDeparture + '\'' +
-                ", stationArrival='" + stationArrival + '\'' +
                 ", timeDeparture='" + timeDeparture + '\'' +
                 ", timeArrival='" + timeArrival + '\'' +
-                ", dateDepartureFormInput=" + dateDepartureFormInput +
                 ", dateDeparture='" + dateDeparture + '\'' +
                 ", dateArrival='" + dateArrival + '\'' +
                 ", price=" + price +
-                ", users=" + users +
+                ", trains=" + trains +
+                ", destinations=" + destinations +
                 '}';
-    }
-
-    public String getStationDepartureUA() {
-        return stationDepartureUA;
-    }
-
-    public void setStationDepartureUA(String stationDepartureUA) {
-        this.stationDepartureUA = stationDepartureUA;
-    }
-
-    public String getStationArrivalUA() {
-        return stationArrivalUA;
-    }
-
-    public void setStationArrivalUA(String stationArrivaUAl) {
-        this.stationArrivalUA = stationArrivaUAl;
     }
 }

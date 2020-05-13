@@ -29,47 +29,16 @@ public class UserCommand implements Command{
             return "WEB-INF/view/login.jsp";
         }
         else if (user.getRole().equals("ROLE_USER")){
-
+            request.setAttribute("user",user);
             return "WEB-INF/view/user.jsp";
         }else{
             return "WEB-INF/view/admin.jsp";
         }
 
-        /*if (session.getAttribute("role") == null){
-            return "WEB-INF/view/login.jsp";
-        }
-        else if (session.getAttribute("role").equals("ROLE_USER")){
-
-            return "WEB-INF/view/user.jsp";
-        }else{
-            return "WEB-INF/view/admin.jsp";
-        }*/
 
 
-        /*try {
-            User user = userDao.checkLogin(userName, password);
-            if (user != null) {
-                if (user.getRole().equals("ROLE_USER")) {
-                    session.setAttribute("iduser",user.getId());
-                    session.setAttribute("firstName",user.getFirstName());
-                    session.setAttribute("login",true);
-                    session.setAttribute("lastName",user.getLastName());
-                    return "WEB-INF/view/user.jsp";
-                }else {
-                    session.setAttribute("iduser",user.getId());
-                    session.setAttribute("firstName",user.getFirstName());
-                    session.setAttribute("login",true);
-                    session.setAttribute("lastName",user.getLastName());
-                    return "WEB-INF/view/admin.jsp";
-                }
 
-            } else {
-                System.out.println("not Found");
-                return "WEB-INF/view/login.jsp";
-            }
-        }catch (Exception ex){
-            throw new RuntimeException(ex);
-        }*/
+
 
 
     }

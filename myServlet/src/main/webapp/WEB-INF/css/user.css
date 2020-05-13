@@ -1,0 +1,14 @@
+body{
+    padding: 0;
+    background: url("https://revistas.unne.edu.ar/public/site/background/backgroundSite03.jpg");
+    background-size: cover;
+}
+h1{
+    color: white;
+}
+
+#logout{
+    position: relative;
+    left: 450px;
+    bottom: -9px;
+}

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 public class JDBCApplicationDao implements ApplicationDao {
@@ -27,8 +28,18 @@ public class JDBCApplicationDao implements ApplicationDao {
     public JDBCApplicationDao(Connection connection){this.connection = connection;}
 
     @Override
-    public Optional<Application> findAll() {
-        return Optional.empty();
+    public void create(Application entity) {
+
+    }
+
+    @Override
+    public List<Application> findAll() {
+        return null;
+    }
+
+    @Override
+    public void update(Application entity) {
+
     }
 
     @Override

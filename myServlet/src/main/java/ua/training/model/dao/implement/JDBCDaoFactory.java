@@ -1,9 +1,6 @@
 package ua.training.model.dao.implement;
 
-import ua.training.model.dao.ApplicationDao;
-import ua.training.model.dao.DaoFactory;
-import ua.training.model.dao.DestinationPropertyDao;
-import ua.training.model.dao.UserDao;
+import ua.training.model.dao.*;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -17,12 +14,17 @@ public class JDBCDaoFactory extends DaoFactory {
 
     @Override
     public DestinationPropertyDao createDestinationDao() {
-        return new JDBCDestinationPropertyPropertyDao(getConnection());
+        return new JDBCDestinationPropertyDao(getConnection());
     }
 
     @Override
     public ApplicationDao createApplicationDao() {
         return new JDBCApplicationDao(getConnection());
+    }
+
+    @Override
+    public TicketDao createTicketDao() {
+        return new JDBCTicketDao(getConnection());
     }
 
 

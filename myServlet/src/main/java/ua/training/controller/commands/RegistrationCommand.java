@@ -1,5 +1,6 @@
 package ua.training.controller.commands;
 
+import ua.training.controller.constants.PageConstants;
 import ua.training.model.dao.entity.User;
 import ua.training.model.service.UserService;
 
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class RegistrationCommand implements Command{
+public class RegistrationCommand implements Command {
 
     private UserService userService;
 
@@ -22,10 +23,13 @@ public class RegistrationCommand implements Command{
         String userName = request.getParameter("userName");
         HttpSession session = request.getSession();
 
-        if (userName != null){
-           if(!userService.isExistUser(userName)){
+
+        if (request.getMethod().equalsIgnoreCase("post")){
+            System.out.println("EXIST " + userService.isExistUser(userName));
+           if(!(userService.isExistUser(userName)) && request.getAttribute("regexFalseOrTrue").equals("true")){
                userService.saveNewUser(request);
-               session.setAttribute("redirect","/login");
+               //session.setAttribute("redirect","/login");
+               request.setAttribute("redirect","/login");
                return null;
            }else{
                return "WEB-INF/view/registration.jsp";

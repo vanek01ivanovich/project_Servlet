@@ -18,6 +18,8 @@
   <filter-mapping>
     <filter-name>AuthFilter</filter-name>
     <url-pattern>/*</url-pattern>
+
+
     <!--logout in order to login again after logout, because url change-->
    <!-- <url-pattern>/logout</url-pattern>-->
   </filter-mapping>
@@ -44,7 +46,10 @@
   </filter>
   <filter-mapping>
     <filter-name>LocaleFilter</filter-name>
+
     <url-pattern>/*</url-pattern>
+
+
   </filter-mapping>
 
   <filter>
@@ -54,6 +59,7 @@
   <filter-mapping>
     <filter-name>RegistrationRegexFilter</filter-name>
     <url-pattern>/registration</url-pattern>
+    <url-pattern>/admin/allUsers/editUser</url-pattern>
   </filter-mapping>
 
   <filter>
@@ -64,6 +70,8 @@
     <filter-name>EncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+
 <!--
   <listener>
     <listener-class>

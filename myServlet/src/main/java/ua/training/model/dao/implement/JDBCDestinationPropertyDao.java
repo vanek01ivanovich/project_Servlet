@@ -3,9 +3,11 @@ package ua.training.model.dao.implement;
 import ua.training.model.dao.DestinationPropertyDao;
 import ua.training.model.dao.entity.Application;
 import ua.training.model.dao.entity.DestinationProperty;
+import ua.training.model.dao.entity.Destinations;
 import ua.training.model.dao.entity.Train;
-import ua.training.model.dao.mapper.DestinationMapper;
-import ua.training.model.dao.mapper.UserMapper;
+import ua.training.model.dao.mapper.PropertyMapper;
+import ua.training.model.dao.mapper.DestinationsMapper;
+import ua.training.model.dao.mapper.TrainMapper;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,23 +15,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class JDBCDestinationPropertyPropertyDao implements DestinationPropertyDao {
+public class JDBCDestinationPropertyDao implements DestinationPropertyDao {
     private Connection connection;
-    private DestinationMapper destinationMapper;
-    public JDBCDestinationPropertyPropertyDao(Connection connection){this.connection = connection;}
+    private PropertyMapper propertyMapper;
+    private DestinationsMapper destinationsMapper;
+    private TrainMapper trainMapper;
+    JDBCDestinationPropertyDao(Connection connection){this.connection = connection;}
 
     @Override
-    public Optional<DestinationProperty> findAll() {
+    public void create(DestinationProperty entity) {
+
+    }
+
+    @Override
+    public List<DestinationProperty> findAll() {
         return null;
     }
 
+    @Override
+    public void update(DestinationProperty entity) {
 
-    final String sqlFindByStationsAndDate = "SELECT  destinations.departureUA,destinations.arrivalUA,destinations.departure,destinations.arrival,property.*,train.trainName " +
+    }
+
+
+    final String sqlFindByStationsAndDate = "SELECT  destinations.*,property.*,train.* " +
             "FROM myrailwaydb.property join destinations on property.destinations_iddestinations = destinations.iddestinations " +
             "join train on property.train_idtrain = train.idtrain where departure = ? and " +
             "arrival = ? and date_departure = ?";
 
-    final String sqlFindByUkrainianStationsAndDate = "SELECT  destinations.departureUA,destinations.arrivalUA,destinations.departure,destinations.arrival,property.*,train.trainName " +
+    final String sqlFindByUkrainianStationsAndDate = "SELECT  destinations.*,property.*,train.* " +
             "FROM myrailwaydb.property join destinations on property.destinations_iddestinations = destinations.iddestinations " +
             "join train on property.train_idtrain = train.idtrain where departureUA = ? and " +
             "arrivalUA = ? and date_departure = ?";
@@ -48,15 +62,20 @@ public class JDBCDestinationPropertyPropertyDao implements DestinationPropertyDa
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            destinationMapper = new DestinationMapper();
-
+            propertyMapper = new PropertyMapper();
+            destinationsMapper = new DestinationsMapper();
+            trainMapper = new TrainMapper();
 
             while (resultSet.next()){
-                DestinationProperty destinationProperty = destinationMapper.extractFromResultSet(resultSet);
-                System.out.println(destinationProperty.toString());
-                destinationMapper.putValuesToMap(destinationMap,destinationProperty);
-                System.out.println("Im here");
-                System.out.println(destinationMap.values());
+                DestinationProperty destinationProperty = propertyMapper.extractFromResultSet(resultSet);
+                Destinations destination = destinationsMapper.extractFromResultSet(resultSet);
+                Train train = trainMapper.extractFromResultSet(resultSet);
+
+                destinationProperty.getDestinations().add(destination);
+                destinationProperty.getTrains().add(train);
+
+                propertyMapper.putValuesToMap(destinationMap,destinationProperty);
+
             }
             return new ArrayList<>(destinationMap.values());
         }catch (SQLException e){
@@ -76,12 +95,12 @@ public class JDBCDestinationPropertyPropertyDao implements DestinationPropertyDa
             preparedStatement.setString(3,application.getDateDeparture());
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            destinationMapper = new DestinationMapper();
+            propertyMapper = new PropertyMapper();
 
             while (resultSet.next()){
-                DestinationProperty destinationProperty = destinationMapper.extractFromResultSet(resultSet);
+                DestinationProperty destinationProperty = propertyMapper.extractFromResultSet(resultSet);
                 System.out.println(destinationProperty.toString());
-                destinationMapper.putValuesToMap(destinationMap,destinationProperty);
+                propertyMapper.putValuesToMap(destinationMap,destinationProperty);
                 System.out.println(destinationMap.values());
             }
             return new ArrayList<>(destinationMap.values());

@@ -4,5 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GenericDao<T> {
-    Optional<T> findAll();
+    void create(T entity);
+    List<T> findAll();
+    void update(T entity);
 }

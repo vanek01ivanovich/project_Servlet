@@ -11,7 +11,8 @@ public class TrainMapper implements ObjectMapper<Train> {
     public Train extractFromResultSet(ResultSet resultSet) throws SQLException {
         Train train = new Train();
         train.setIdTrain(resultSet.getInt("idtrain"));
-        train.setTrainName(resultSet.getString("train_name"));
+        train.setTrainName(resultSet.getString("trainName"));
+        train.setTrainNameUA(resultSet.getString("trainNameUA"));
         return train;
     }
 

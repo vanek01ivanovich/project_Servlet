@@ -1,3 +1,4 @@
+/*
 package ua.training.controller.listener;
 
 import javax.servlet.http.HttpSessionEvent;
@@ -13,4 +14,4 @@ public class SessionListener implements HttpSessionListener {
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 
     }
-}
+}*/

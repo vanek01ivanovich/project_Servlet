@@ -1,8 +1,10 @@
 package ua.training.controller.commands;
 
+import ua.training.controller.constants.PageConstants;
 import ua.training.model.dao.DaoFactory;
 import ua.training.model.dao.UserDao;
 import ua.training.model.dao.entity.User;
+import static ua.training.controller.constants.PageConstants.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +42,8 @@ public class LoginUserCommand implements Command {
 
                     session.setAttribute("login",true);
                     session.setAttribute("user",user);
-                    session.setAttribute("redirect","/user");
+                    //session.setAttribute("redirect","/user");
+                    request.setAttribute("redirect","/user");
                     System.out.println("found");
 
 
@@ -50,7 +53,8 @@ public class LoginUserCommand implements Command {
 
                     session.setAttribute("login",true);
                     session.setAttribute("user",user);
-                    session.setAttribute("redirect","/admin");
+                    //session.setAttribute("redirect","/admin");
+                    request.setAttribute("redirect","/admin");
 
 
                 }

@@ -3,10 +3,12 @@ package ua.training;
 import ua.training.model.dao.entity.User;
 
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class test {
   public static void main(String[] args) {
-     String url = "/users/findroute";
-
+      Pattern pattern = Pattern.compile(".*\\\\S+.");
+      String test = null;
+      System.out.println(test.isEmpty());
   }
 }

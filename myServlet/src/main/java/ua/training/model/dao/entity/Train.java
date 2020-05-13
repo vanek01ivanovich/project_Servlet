@@ -8,6 +8,7 @@ import java.util.List;
 public class Train {
     private int idTrain;
     private String trainName;
+    private String trainNameUA;
     //private List<Destination> destinations= new ArrayList<>();
 
     public int getIdTrain() {
@@ -34,12 +35,22 @@ public class Train {
         this.destinations = destinations;
     }
 */
+
+
+    public String getTrainNameUA() {
+        return trainNameUA;
+    }
+
+    public void setTrainNameUA(String trainNameUA) {
+        this.trainNameUA = trainNameUA;
+    }
+
     @Override
     public String toString() {
         return "Train{" +
                 "idTrain=" + idTrain +
                 ", trainName='" + trainName + '\'' +
-               // ", destinations=" + destinations +
+                ", trainNameUA='" + trainNameUA + '\'' +
                 '}';
     }
 }

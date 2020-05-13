@@ -1,8 +1,10 @@
 package ua.training.controller.commands;
 
+import ua.training.controller.constants.PageConstants;
 import ua.training.model.dao.entity.DestinationProperty;
 import ua.training.model.service.ApplicationService;
 import ua.training.model.service.DestinationPropertyService;
+import static ua.training.controller.constants.PageConstants.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +28,8 @@ public class FindRouteCommand implements Command {
 
         session = request.getSession();
 
-        if(!request.getParameterMap().isEmpty()){
+
+        if(request.getMethod().equalsIgnoreCase("post")){
 
 
             List<DestinationProperty> destinationProperties = session.getAttribute("lang").equals("en") ?
@@ -36,13 +39,15 @@ public class FindRouteCommand implements Command {
 
             if (!destinationProperties.isEmpty()){
 
+
+                request.setAttribute("emptyMessage",false);
                 session.setAttribute("listRoutes",destinationProperties);
-                System.out.println(destinationProperties.get(0).getPrice());
-                System.out.println(destinationProperties.get(1).getPrice());
-                session.setAttribute("redirect","/routes");
+
+                request.setAttribute("redirect","/routes");
               return null;
 
             }else{
+                request.setAttribute("emptyMessage",true);
                 System.out.println("EMpty");
                 return "WEB-INF/view/findRoute.jsp";
             }

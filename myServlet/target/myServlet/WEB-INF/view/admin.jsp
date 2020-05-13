@@ -15,5 +15,19 @@
 <h1>Hi Admin!</h1>
 <a href="/logout">logout</a>
 
+
+
+
+<form action="/admin/allUsers">
+    <button type="submit">
+        look all users
+    </button>
+</form>
+<form action="/admin/allTickets">
+    <button type="submit">
+        look all tickets
+    </button>
+</form>
+
 </body>
 </html>

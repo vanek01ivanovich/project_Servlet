@@ -40,6 +40,7 @@ public class AuthFilter implements Filter {
         String currentUrl = req.getRequestURI();
 
 
+
         if (!(currentUrl.equals("/") || currentUrl.equals("/login") || currentUrl.equals("/registration")) && session.getAttribute("login") == null){
             res.sendRedirect("/login");
         }else if ((currentUrl.equals("/") || currentUrl.equals("/login") || currentUrl.equals("/registration")) && session.getAttribute("login") != null){
@@ -49,7 +50,7 @@ public class AuthFilter implements Filter {
                 res.sendRedirect("/user");
             }else{
 
-                res.sendRedirect("admin");
+                res.sendRedirect("/admin");
             }
         }else {
             filterChain.doFilter(request, response);
@@ -57,7 +58,6 @@ public class AuthFilter implements Filter {
 
 
     }
-
     @Override
     public void destroy() {
 
