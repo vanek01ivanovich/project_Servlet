@@ -59,6 +59,11 @@ public class JDBCTicketDao implements TicketDao {
 
     }
 
+    @Override
+    public void delete(Ticket entity) {
+
+    }
+
 
     @Override
     public List<User> findAllUsersAndTickets() {

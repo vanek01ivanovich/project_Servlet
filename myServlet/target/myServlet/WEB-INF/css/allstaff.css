@@ -1,10 +1,27 @@
-
+body{
+    padding: 0;
+    background: url("https://revistas.unne.edu.ar/public/site/background/backgroundSite03.jpg");
+    background-size: cover;
+}
 
 .containerr {
     max-width: 1200px;
     padding: 0;
 //margin-top: 110px;
 
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 1500px; */
+}
+
+
+.table {
+    width: 72%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
 }
 input{
     border: none;

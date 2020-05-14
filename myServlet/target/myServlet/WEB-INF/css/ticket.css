@@ -1,3 +1,9 @@
+body{
+    padding: 0;
+    background: url("https://revistas.unne.edu.ar/public/site/background/backgroundSite03.jpg");
+    background-size: cover;
+}
+
 .container {
     max-width: 500px;
     padding: 0;

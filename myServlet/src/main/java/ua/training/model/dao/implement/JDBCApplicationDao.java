@@ -43,6 +43,11 @@ public class JDBCApplicationDao implements ApplicationDao {
     }
 
     @Override
+    public void delete(Application entity) {
+
+    }
+
+    @Override
     public Application addApplication(Application application) {
 
         try(PreparedStatement preparedStatement =

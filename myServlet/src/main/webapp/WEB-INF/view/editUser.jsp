@@ -19,59 +19,135 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </head>
+<style>
+    <%@include file="/WEB-INF/css/headerFooter.css"%>
+    <%@include file="/WEB-INF/css/registration.css"%>
+</style>
 <body>
+<header>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/login">HOME</a>
+        <div class="dropdown">
+            <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Languages
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="?lang=en">English</a>
+                <a class="dropdown-item" href="?lang=ua">Ukrainian</a>
+            </div>
+        </div>
+    </nav>
+</header>
 
 <form  method="post">
-    <input type="text" name="userName" value="${user.getUserName()}">
-    <c:if test="${validUserName == false}">
-        user LOL
-    </c:if>
-    <br>
-    <input type="text" name="firstName" value="${user.getFirstName()}">
-    <c:if test="${validFirstName == false}">
-        firstName LOL
-    </c:if>
-    <br>
-    <input type="text" name="lastName" value="${user.getLastName()}">
-    <c:if test="${validLastName == false}">
-        lastName LOL
-    </c:if>
-    <br>
-    <input type="text" name="ukrFirstName" value="${user.getFirstNameUkr()}">
-    <c:if test="${validFirstNameUkr == false}">
-        urk first LOL
-    </c:if>
-    <br>
-    <input type="text" name="ukrLastName" value="${user.getLastNameUkr()}">
-    <c:if test="${validLastNameUkr == false}">
-        ukr first LOL
-    </c:if>
-
-
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">Role</label>
+    <div class="container card text-center">
+        <div class="card-header">
+            Registration
         </div>
-        <select name="role" class="custom-select" id="inputGroupSelect01">
+        <div class="row">
+            <div class="col-sm ">
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">User Name</span>
+                            </div>
+                            <input value="${user.getUserName()}" name="userName" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <c:if test="${validUserName == false}">
+                            <div class="alert alert-danger" role="alert">
+                                user LOL
+                            </div>
+                        </c:if>
 
-            <c:if test="${user.getRole() == 'ROLE_USER'}">
-                <option value="ROLE_USER" selected>USER</option>
-                <option value="ROLE_ADMIN">ADMIN</option>
-            </c:if>
-            <c:if test="${user.getRole() == 'ROLE_ADMIN'}">
-                <option value="ROLE_ADMIN" selected>ADMIN</option>
-                <option value="ROLE_USER">USER</option>
-            </c:if>
-        </select>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">First Name</span>
+                            </div>
+                            <input name="firstName" value="${user.getFirstName()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <c:if test="${validFirstName == false}">
+                            <div class="alert alert-danger" role="alert">
+                                user LOL
+                            </div>
+                        </c:if>
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Last Name</span>
+                            </div>
+                            <input name="lastName" value="${user.getLastName()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <c:if test="${validLastName == false}">
+                            <div class="alert alert-danger" role="alert">
+                                user LOL
+                            </div>
+                        </c:if>
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">FirstUkr Name</span>
+                            </div>
+                            <input name="ukrFirstName" value="${user.getFirstNameUkr()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <c:if test="${validFirstNameUkr == false}">
+                            <div class="alert alert-danger" role="alert">
+                                user LOL
+                            </div>
+                        </c:if>
+
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">LastUkr Name</span>
+                            </div>
+                            <input name="ukrLastName" value="${user.getLastNameUkr()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <c:if test="${validLastNameUkr == false}">
+                            <div class="alert alert-danger" role="alert">
+                                user LOL
+                            </div>
+                        </c:if>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Role</label>
+                            </div>
+                            <select name="role" class="custom-select" id="inputGroupSelect01">
+
+                                <c:if test="${user.getRole() == 'ROLE_USER'}">
+                                    <option value="ROLE_USER" selected>USER</option>
+                                    <option value="ROLE_ADMIN">ADMIN</option>
+                                </c:if>
+                                <c:if test="${user.getRole() == 'ROLE_ADMIN'}">
+                                    <option value="ROLE_ADMIN" selected>ADMIN</option>
+                                    <option value="ROLE_USER">USER</option>
+                                </c:if>
+                            </select>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="card-footer text-muted">
+                        <button type="submit" class="btn btn-outline-primary waves-effect" >submit</button>
+
+                    </div>
+            </div>
+        </div>
     </div>
 
-
-    <br>
-    <button type="submit">submit</button>
 </form>
+
 <form action="/admin/allUsers">
     <button type="submit">back</button>
 </form>
 
+<footer class="text-white bg-dark">
+    <div id="footer" class="card-footer text-muted text-white bg-dark">© 2020 Copyright:All rights reserved</div>
+</footer>
 </body>
 </html>

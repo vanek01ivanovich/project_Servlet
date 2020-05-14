@@ -20,6 +20,8 @@ public class JDBCUserDao implements UserDao {
     private BcryptEncoder encoder = new BcryptEncoder();
 
 
+
+    private final String sqlDeleteUser = "delete from users where users.idusers=?";
     private final String sqlSelectAllUsers = "select * from users";
     private final String sqlUpdateUser = "update users set users.user_name=?," +
                                         "users.first_name=?,users.last_name=?,users.role=? " +
@@ -134,6 +136,17 @@ public class JDBCUserDao implements UserDao {
             preparedStatement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delete(User user) {
+        try(PreparedStatement preparedStatement =
+                connection.prepareStatement(sqlDeleteUser)){
+            preparedStatement.setInt(1,user.getId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException ex){
+            ex.printStackTrace();
         }
     }
 }

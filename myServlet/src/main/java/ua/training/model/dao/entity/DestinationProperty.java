@@ -1,7 +1,6 @@
 package ua.training.model.dao.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DestinationProperty {

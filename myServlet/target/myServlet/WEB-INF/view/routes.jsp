@@ -89,6 +89,24 @@
                                 <br>
                                 ${routes.getTimeArrival()}
                             </th>
+                            <th>
+                                <c:if test="${lang == 'en'}">
+                                    <c:forEach items="${routes.getTrains()}" var="destination">
+                                        <h5>Train</h5>
+                                        ${destination.getTrainName()}
+                                    </c:forEach>
+                                </c:if>
+                                <c:if test="${lang == 'ua'}">
+                                    <c:forEach items="${routes.getTrains()}" var="destination">
+                                        <h5>Train</h5>
+                                        ${destination.getTrainNameUA()}
+                                    </c:forEach>
+                                </c:if>
+                            </th>
+                            <th>
+                                <h5>Price</h5>
+                                ${routes.getPrice()}
+                            </th>
 
 
                             <th id="button" scope="col"><button type="submit" class="btn btn-outline-primary waves-effect" >Choose</button></th>

@@ -15,49 +15,54 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
 
 </head>
 <style type="text/css">
     <%@include file="/WEB-INF/css/index.css"%>
+    <%@include file="/WEB-INF/css/headerFooter.css"%>
 </style>
 <body>
 <header>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Navbar</a>
+        <a class="navbar-brand" href="/">Railway</a>
 
-        <a href="?lang=en">EN</a>
-        <a href="?lang=ua">UA</a>
+        <div class="dropdown">
+            <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <fmt:message key="languages"/>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="?lang=en">English</a>
+                <a class="dropdown-item" href="?lang=ua">Ukrainian</a>
+            </div>
+        </div>
     </nav>
 
 </header>
 
-<%--
-<form action="${pageContext.request.contextPath}/login" method="post">
-    <button>login</button>
-</form>--%>
-
-
-<h2>
-    <fmt:message key="login.initial"/>
-</h2>
 
 <ul class="nav justify-content-center">
     <li class="nav-item">
-        <a type="text/html" href="${pageContext.request.contextPath}/login">login</a>
+        <a class="btn btn-light" href="/login" role="button"> <fmt:message key="login"/></a>
     </li>
 </ul>
 
 
 <h1 class="rev-block">
-    <span>Block Reveal</span>
+    <fmt:message key="guest.hello1"/>
 </h1>
 <h1 class="rev-block" id="onemore">
-    <span>Block Project</span>
+   <fmt:message key="guest.hello2"/>
 </h1>
 
 
 <footer class="text-white bg-dark">
-    <div id="footer" class="card-footer text-muted text-white bg-dark">© 2020 Copyright:All rights reserved</div>
+    <div id="footer" class="card-footer text-muted text-white bg-dark"><fmt:message key="footer"/></div>
 </footer>
 
 

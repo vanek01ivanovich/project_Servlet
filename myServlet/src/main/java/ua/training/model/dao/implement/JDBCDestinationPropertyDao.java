@@ -37,6 +37,11 @@ public class JDBCDestinationPropertyDao implements DestinationPropertyDao {
 
     }
 
+    @Override
+    public void delete(DestinationProperty entity) {
+
+    }
+
 
     final String sqlFindByStationsAndDate = "SELECT  destinations.*,property.*,train.* " +
             "FROM myrailwaydb.property join destinations on property.destinations_iddestinations = destinations.iddestinations " +
@@ -96,12 +101,23 @@ public class JDBCDestinationPropertyDao implements DestinationPropertyDao {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             propertyMapper = new PropertyMapper();
+            destinationsMapper = new DestinationsMapper();
+            trainMapper = new TrainMapper();
 
             while (resultSet.next()){
                 DestinationProperty destinationProperty = propertyMapper.extractFromResultSet(resultSet);
+                Destinations destination = destinationsMapper.extractFromResultSet(resultSet);
+                Train train = trainMapper.extractFromResultSet(resultSet);
+
+                destinationProperty.getDestinations().add(destination);
+                destinationProperty.getTrains().add(train);
+
+                propertyMapper.putValuesToMap(destinationMap,destinationProperty);
+
+               /* DestinationProperty destinationProperty = propertyMapper.extractFromResultSet(resultSet);
                 System.out.println(destinationProperty.toString());
                 propertyMapper.putValuesToMap(destinationMap,destinationProperty);
-                System.out.println(destinationMap.values());
+                System.out.println(destinationMap.values());*/
             }
             return new ArrayList<>(destinationMap.values());
         } catch (SQLException e) {

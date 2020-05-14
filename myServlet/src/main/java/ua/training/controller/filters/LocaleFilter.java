@@ -19,6 +19,7 @@ public class LocaleFilter implements Filter {
             throws IOException, ServletException {
 
 
+
         servletResponse.setContentType("text/html");
         servletResponse.setCharacterEncoding("UTF-8");
         servletRequest.setCharacterEncoding("UTF-8");
@@ -26,12 +27,19 @@ public class LocaleFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+        System.out.println("Locale = " + request.getParameterMap().isEmpty());
+
+
         if (request.getSession().getAttribute("lang") == null) {
             request.getSession().setAttribute("lang","en");
+
         }
+        System.out.println(request.getParameter("lang"));
 
         if (request.getParameter("lang") != null){
+
             request.getSession().setAttribute("lang",request.getParameter("lang"));
+
         }
 
         filterChain.doFilter(request, response);

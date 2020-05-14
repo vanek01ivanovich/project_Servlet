@@ -14,6 +14,7 @@ import java.util.List;
 public class TicketCommand implements Command {
     private TicketService ticketService;
     private Ticket ticket = new Ticket();
+    private static String idProperty;
 
     public TicketCommand(TicketService ticketService){
         this.ticketService = ticketService;
@@ -23,14 +24,18 @@ public class TicketCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession();
-
-        System.out.println("im here = " + request.getMethod());
-
+        User user = (User) session.getAttribute("user");
         if (!request.getMethod().equalsIgnoreCase("post")) {
+
             List<DestinationProperty> ticket = (List<DestinationProperty>) session.getAttribute("listRoutes");
 
-            DestinationProperty destinationProperty = ticketService.getCurrentTicket(ticket, Integer.parseInt(request.getParameter("idProperty")));
 
+            if (request.getParameter("idProperty") != null){
+                idProperty = request.getParameter("idProperty");
+            }
+
+            DestinationProperty destinationProperty = ticketService.getCurrentTicket(ticket, Integer.parseInt(idProperty));
+            request.setAttribute("user",user);
             request.setAttribute("ticket", destinationProperty);
             return "WEB-INF/view/ticket.jsp";
         }else{
@@ -41,3 +46,4 @@ public class TicketCommand implements Command {
 
     }
 }
+

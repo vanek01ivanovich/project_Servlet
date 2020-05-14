@@ -16,8 +16,11 @@
 <head>
     <link rel="icon" href="data:,">
     <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
 </head>
 <style>
@@ -27,39 +30,113 @@
 <body>
 <header>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand">Navbar</a>
+        <a class="navbar-brand" href="/user">HOME</a>
 
-        <a href="?lang=en">EN</a>
-        <a href="?lang=ua">UA</a>
+        <form action="/logout">
+            <button id="logout" type="submit" class="btn btn-outline-warning">logout</button>
+        </form>
+        <div class="dropdown">
+            <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Languages
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="?lang=en">English</a>
+                <a class="dropdown-item" href="?lang=ua">Ukrainian</a>
+            </div>
+        </div>
     </nav>
 </header>
 <form action="/ticket" method="post">
+<div class="container card text-center">
+    <div class="card-header">
+        Ticket
+    </div>
+    <div class="card-body">
 
             <input type="hidden" name="idProperty" value="${ticket.getIdProperty()}">
-                <p>
-                    <c:if test="${lang == 'en'}">
-                        <c:forEach items="${ticket.getDestinations()}" var="tick">
-                            <c:out value="${tick.getDeparture()}"/>
-                        </c:forEach>
+            <div class="info">
+                <span>First name</span>
+                ${user.getFirstName()}
+            </div>
 
-                    </c:if>
-                    <c:if test="${lang == 'ua'}">
-                        <c:forEach items="${ticket.getDestinations()}" var="tick">
-                            <c:out value="${tick.getDepartureUA()}"/>
-                        </c:forEach>
-                    </c:if>
+            <div class="info">
+                <span>Last name</span>
+                ${user.getLastName()}
+            </div>
 
-                </p>
-                <p>
-                    <c:out value="${ticket.getPrice()}"/>
-                </p>
-                <p>
-                    <c:out value="${ticket.getTimeArrival()}"/>
-                </p>
-                <button type="submit" class="btn btn-outline-primary waves-effect" >Choose</button>
+            <div class="info">
+                <span>Departure</span>
+                <c:if test="${lang == 'en'}">
+                    <c:forEach items="${ticket.getDestinations()}" var="tick">
+                        <c:out value="${tick.getDeparture()}"/>
+                    </c:forEach>
 
+                </c:if>
+                <c:if test="${lang == 'ua'}">
+                    <c:forEach items="${ticket.getDestinations()}" var="tick">
+                        <c:out value="${tick.getDepartureUA()}"/>
+                    </c:forEach>
+                </c:if>
+            </div>
 
+            <div class="info">
+                <span>Arrival</span>
+                <c:if test="${lang == 'en'}">
+                    <c:forEach items="${ticket.getDestinations()}" var="tick">
+                        <c:out value="${tick.getArrival()}"/>
+                    </c:forEach>
 
+                </c:if>
+                <c:if test="${lang == 'ua'}">
+                    <c:forEach items="${ticket.getDestinations()}" var="tick">
+                        <c:out value="${tick.getArrivalUA()}"/>
+                    </c:forEach>
+                </c:if>
+            </div>
+
+            <div class="info">
+                <span>Date/Time departure</span>
+                <c:out value="${ticket.getDateDeparture()}"/>
+                /
+                <c:out value="${ticket.getTimeDeparture()}"/>
+            </div>
+
+            <div class="info">
+                <span>Date/Time Arrival</span>
+                <c:out value="${ticket.getDateArrival()}"/>
+                /
+                <c:out value="${ticket.getTimeArrival()}"/>
+            </div>
+
+            <div class="info">
+                <span>Train</span>
+                <c:if test="${lang == 'en'}">
+                    <c:forEach items="${ticket.getTrains()}" var="train">
+                        <c:out value="${train.getTrainName()}"/>
+                    </c:forEach>
+
+                </c:if>
+                <c:if test="${lang == 'ua'}">
+                    <c:forEach items="${ticket.getTrains()}" var="train">
+                        <c:out value="${train.getTrainNameUA()}"/>
+                    </c:forEach>
+                </c:if>
+
+            </div>
+
+            <div class="info">
+                <span>Price</span>
+                <c:out value="${ticket.getPrice()}"/>
+            </div>
+
+    </div>
+
+    <div class="card-footer text-muted">
+        <button type="submit" class="btn btn-outline-primary waves-effect" >Choose</button>
+
+    </div>
+
+</div>
 </form>
 
 </body>
