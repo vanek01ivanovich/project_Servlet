@@ -47,9 +47,9 @@ public class JDBCUserDao implements UserDao {
             if(resultSet.next()){
                 user = userMapper.extractFromResultSet(resultSet);
 
-                if (!encoder.checkPass(password,user.getPassword())){
+                /*if (!encoder.checkPass(password,user.getPassword())){
                     return null;
-                }
+                }*/
             }
 
         }catch (Exception e){

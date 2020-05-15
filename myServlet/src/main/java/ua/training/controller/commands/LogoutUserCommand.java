@@ -11,12 +11,8 @@ public class LogoutUserCommand implements Command{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-
-            session.removeAttribute("userName");
-            session.removeAttribute("login");
-            session.removeAttribute("role");
-            session.removeAttribute("iduser");
-            return "WEB-INF/view/login.jsp";
+        session.invalidate();
+        return "WEB-INF/view/login.jsp";
 
     }
 }

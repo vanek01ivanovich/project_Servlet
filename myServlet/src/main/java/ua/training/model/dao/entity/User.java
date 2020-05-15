@@ -17,6 +17,7 @@ public class User {
     private String userName;
 
     private List<DestinationProperty> destinationProperties = new ArrayList<>();
+    private List<Train> trains = new ArrayList<>();
 
     public List<Train> getTrains(){
         return trains;
@@ -26,7 +27,6 @@ public class User {
         this.trains = trains;
     }
 
-    private List<Train> trains = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -84,19 +84,7 @@ public class User {
         this.destinationProperties = destinationProperties;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", role='" + role + '\'' +
-                ", password='" + password + '\'' +
-                ", userName='" + userName + '\'' +
-                ", destinationProperties=" + destinationProperties +
-                ", trains=" + trains +
-                '}';
-    }
+
 
     public String getFirstNameUkr() {
         return firstNameUkr;
@@ -112,5 +100,21 @@ public class User {
 
     public void setLastNameUkr(String lastNameUkr) {
         this.lastNameUkr = lastNameUkr;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", firstNameUkr='" + firstNameUkr + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", lastNameUkr='" + lastNameUkr + '\'' +
+                ", role='" + role + '\'' +
+                ", password='" + password + '\'' +
+                ", userName='" + userName + '\'' +
+                ", destinationProperties=" + destinationProperties +
+                ", trains=" + trains +
+                '}';
     }
 }

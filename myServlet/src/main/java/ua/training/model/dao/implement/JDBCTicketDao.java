@@ -1,10 +1,8 @@
 package ua.training.model.dao.implement;
 
 import ua.training.model.dao.TicketDao;
-import ua.training.model.dao.entity.DestinationProperty;
-import ua.training.model.dao.entity.Ticket;
-import ua.training.model.dao.entity.Train;
-import ua.training.model.dao.entity.User;
+import ua.training.model.dao.entity.*;
+import ua.training.model.dao.mapper.DestinationsMapper;
 import ua.training.model.dao.mapper.PropertyMapper;
 import ua.training.model.dao.mapper.TrainMapper;
 import ua.training.model.dao.mapper.UserMapper;
@@ -21,11 +19,12 @@ public class JDBCTicketDao implements TicketDao {
     private UserMapper userMapper;
     private PropertyMapper propertyMapper;
     private TrainMapper trainMapper;
+    private DestinationsMapper destinationsMapper;
 
     private final String sqlInsertTicket = "insert into ticket(users_idusers,property_idproperty) " +
                                                 "values(?,?)";
 
-    private final String sqlSelectUsersAndTickets = "SELECT users.*,destinations.*, property.*,train.* from ticket join users on " +
+    private final String sqlSelectUsersAndTickets = "SELECT ticket.idticket, users.*,destinations.*, property.*,train.* from ticket join users on " +
             "ticket.users_idusers = users.idusers join property on ticket.property_idproperty = property.idproperty join destinations " +
             "on  property.destinations_iddestinations = destinations.iddestinations " +
             "join train on property.train_idtrain = train.idtrain";
@@ -75,13 +74,15 @@ public class JDBCTicketDao implements TicketDao {
             userMapper = new UserMapper();
             propertyMapper = new PropertyMapper();
             trainMapper = new TrainMapper();
+            destinationsMapper = new DestinationsMapper();
 
             while(resultSet.next()){
                 User user = userMapper.extractFromResultSet(resultSet);
                 DestinationProperty destinationProperty = propertyMapper.extractFromResultSet(resultSet);
+                Destinations destinations = destinationsMapper.extractFromResultSet(resultSet);
                 Train train = trainMapper.extractFromResultSet(resultSet);
 
-
+                destinationProperty.getDestinations().add(destinations);
                 user.getDestinationProperties().add(destinationProperty);
                 user.getTrains().add(train);
                 userAndTicketsList.add(user);

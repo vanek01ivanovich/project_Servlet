@@ -22,6 +22,7 @@
 <style>
     <%@include file="/WEB-INF/css/headerFooter.css"%>
     <%@include file="/WEB-INF/css/registration.css"%>
+    <%@include file="/WEB-INF/css/editUser.css"%>
 </style>
 <body>
 <header>
@@ -40,106 +41,105 @@
 </header>
 
 <form  method="post">
-<div class="container card text-center">
-    <div class="card-header">
-        Registration
-    </div>
-    <div class="row">
-        <div class="col-sm ">
-                <div class="card-body">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">User Name</span>
+    <div class="container card text-center">
+        <div class="card-header">
+            Edit user <h5>${user.getUserName()}</h5>
+        </div>
+        <div class="row">
+            <div class="col-sm ">
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">User Name</span>
+                            </div>
+                            <input value="${user.getUserName()}" name="userName" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                         </div>
-                        <input value="${user.getUserName()}" name="userName" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        <c:if test="${validUserName == false}">
+                            <div class="alert alert-danger" role="alert">
+                                user LOL
+                            </div>
+                        </c:if>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">First Name</span>
+                            </div>
+                            <input name="firstName" value="${user.getFirstName()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <c:if test="${validFirstName == false}">
+                            <div class="alert alert-danger" role="alert">
+                                user LOL
+                            </div>
+                        </c:if>
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Last Name</span>
+                            </div>
+                            <input name="lastName" value="${user.getLastName()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <c:if test="${validLastName == false}">
+                            <div class="alert alert-danger" role="alert">
+                                user LOL
+                            </div>
+                        </c:if>
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">FirstUkr Name</span>
+                            </div>
+                            <input name="ukrFirstName" value="${user.getFirstNameUkr()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <c:if test="${validFirstNameUkr == false}">
+                            <div class="alert alert-danger" role="alert">
+                                user LOL
+                            </div>
+                        </c:if>
+
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">LastUkr Name</span>
+                            </div>
+                            <input name="ukrLastName" value="${user.getLastNameUkr()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <c:if test="${validLastNameUkr == false}">
+                            <div class="alert alert-danger" role="alert">
+                                user LOL
+                            </div>
+                        </c:if>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Role</label>
+                            </div>
+                            <select name="role" class="custom-select" id="inputGroupSelect01">
+
+                                <c:if test="${user.getRole() == 'ROLE_USER'}">
+                                    <option value="ROLE_USER" selected>USER</option>
+                                    <option value="ROLE_ADMIN">ADMIN</option>
+                                </c:if>
+                                <c:if test="${user.getRole() == 'ROLE_ADMIN'}">
+                                    <option value="ROLE_ADMIN" selected>ADMIN</option>
+                                    <option value="ROLE_USER">USER</option>
+                                </c:if>
+                            </select>
+                        </div>
+
+
+
                     </div>
-                    <c:if test="${validUserName == false}">
-                        <div class="alert alert-danger" role="alert">
-                            user LOL
-                        </div>
-                    </c:if>
 
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">First Name</span>
-                        </div>
-                        <input name="firstName" value="${user.getFirstName()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    <div class="card-footer text-muted">
+                        <button type="submit" class="btn btn-outline-primary waves-effect" >submit</button>
+
                     </div>
-                    <c:if test="${validFirstName == false}">
-                        <div class="alert alert-danger" role="alert">
-                            user LOL
-                        </div>
-                    </c:if>
-
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Last Name</span>
-                        </div>
-                        <input name="lastName" value="${user.getLastName()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <c:if test="${validLastName == false}">
-                        <div class="alert alert-danger" role="alert">
-                            user LOL
-                        </div>
-                    </c:if>
-
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">FirstUkr Name</span>
-                        </div>
-                        <input name="ukrFirstName" value="${user.getFirstNameUkr()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <c:if test="${validFirstNameUkr == false}">
-                        <div class="alert alert-danger" role="alert">
-                            user LOL
-                        </div>
-                    </c:if>
-
-
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">LastUkr Name</span>
-                        </div>
-                        <input name="ukrLastName" value="${user.getLastNameUkr()}" type="text" class="form-control" id="validationServerUsername" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <c:if test="${validLastNameUkr == false}">
-                        <div class="alert alert-danger" role="alert">
-                            user LOL
-                        </div>
-                    </c:if>
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Role</label>
-                        </div>
-                        <select name="role" class="custom-select" id="inputGroupSelect01">
-
-                            <c:if test="${user.getRole() == 'ROLE_USER'}">
-                                <option value="ROLE_USER" selected>USER</option>
-                                <option value="ROLE_ADMIN">ADMIN</option>
-                            </c:if>
-                            <c:if test="${user.getRole() == 'ROLE_ADMIN'}">
-                                <option value="ROLE_ADMIN" selected>ADMIN</option>
-                                <option value="ROLE_USER">USER</option>
-                            </c:if>
-                        </select>
-                    </div>
-
-
-                    <%--<br>
-                    <button type="submit">submit</button>--%>
-                </div>
-
-                <div class="card-footer text-muted">
-                    <button type="submit" class="btn btn-outline-primary waves-effect" >submit</button>
-
-                </div>
+            </div>
         </div>
     </div>
-</div>
 
 </form>
 

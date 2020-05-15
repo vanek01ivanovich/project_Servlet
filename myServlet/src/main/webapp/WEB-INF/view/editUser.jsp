@@ -22,6 +22,7 @@
 <style>
     <%@include file="/WEB-INF/css/headerFooter.css"%>
     <%@include file="/WEB-INF/css/registration.css"%>
+    <%@include file="/WEB-INF/css/editUser.css"%>
 </style>
 <body>
 <header>
@@ -42,7 +43,7 @@
 <form  method="post">
     <div class="container card text-center">
         <div class="card-header">
-            Registration
+            Edit user <h5>${user.getUserName()}</h5>
         </div>
         <div class="row">
             <div class="col-sm ">

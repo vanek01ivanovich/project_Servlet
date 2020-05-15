@@ -2,6 +2,7 @@ package ua.training.controller;
 
 
 import ua.training.controller.commands.*;
+import ua.training.controller.security.UserSessionSecurity;
 import ua.training.model.service.ApplicationService;
 import ua.training.model.service.DestinationPropertyService;
 import ua.training.model.service.TicketService;
@@ -19,22 +20,26 @@ import java.util.Map;
 public class Servlet extends  HttpServlet {
 
     private Map<String, Command> commands = new HashMap<>();
+    private UserService userService = new UserService();
+    private DestinationPropertyService destinationPropertyService = new DestinationPropertyService();
+    private ApplicationService applicationService = new ApplicationService();
+    private TicketService ticketService = new TicketService();
+    private static UserSessionSecurity userSessionSecurity = new UserSessionSecurity();
 
     @Override
     public void init(){
         System.out.println("init");
         commands.put("user",new UserCommand());
         commands.put("admin",new UserCommand());
-        commands.put("login",new LoginUserCommand());
+        commands.put("login",new LoginUserCommand(userService,userSessionSecurity));
         commands.put("logout",new LogoutUserCommand());
-        commands.put("registration",new RegistrationCommand(new UserService()));
-        commands.put("findroute",new FindRouteCommand(new DestinationPropertyService(),new ApplicationService()));
+        commands.put("registration",new RegistrationCommand(userService));
+        commands.put("findroute",new FindRouteCommand(destinationPropertyService,applicationService));
         commands.put("routes",new RoutesCommand());
-        commands.put("ticket",new TicketCommand(new TicketService()));
-        commands.put("allUsers",new LookAllUsersCommand(new UserService()));
-        commands.put("allTickets",new LookAllTicketsCommand(new TicketService()));
-       // commands.put("editUser",new LookAllUsersCommand(new UserService()));
-        commands.put("editUser",new EditUserCommand(new UserService()));
+        commands.put("ticket",new TicketCommand(ticketService));
+        commands.put("allUsers",new LookAllUsersCommand(userService));
+        commands.put("allTickets",new LookAllTicketsCommand(ticketService));
+        commands.put("editUser",new EditUserCommand(userService));
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)

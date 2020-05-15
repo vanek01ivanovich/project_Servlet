@@ -19,9 +19,8 @@ public class LookAllTicketsCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         List<User> userAndTickets = ticketService.getAllUsersTickets();
-        System.out.println("FirstName = " + userAndTickets.get(0).getFirstName());
-        System.out.println("destin = " + userAndTickets.get(0).getDestinationProperties());
 
+        System.out.println(userAndTickets);
         request.setAttribute("allTickets",userAndTickets);
         return "/WEB-INF/view/allTickets.jsp";
     }
