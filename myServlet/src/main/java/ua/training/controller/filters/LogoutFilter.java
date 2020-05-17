@@ -18,7 +18,6 @@ public class LogoutFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         //resp.setHeader("Expires", "Tue, 03 Jul 2001 06:00:00 GMT");
         HttpSession session = req.getSession();
-        System.out.println("LogoutFilter");
         resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         resp.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         resp.setDateHeader("Expires", 0);

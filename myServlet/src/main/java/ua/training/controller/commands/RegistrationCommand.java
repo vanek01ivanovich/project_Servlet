@@ -21,17 +21,14 @@ public class RegistrationCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response){
         String userName = request.getParameter("userName");
-        HttpSession session = request.getSession();
-
 
         if (request.getMethod().equalsIgnoreCase("post")){
-            System.out.println("EXIST " + userService.isExistUser(userName));
            if(!(userService.isExistUser(userName)) && request.getAttribute("regexFalseOrTrue").equals("true")){
                userService.saveNewUser(request);
-               //session.setAttribute("redirect","/login");
                request.setAttribute("redirect","/login");
                return null;
            }else{
+               request.setAttribute("alert",0);
                return "WEB-INF/view/registration.jsp";
            }
         }else {

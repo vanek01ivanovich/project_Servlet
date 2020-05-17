@@ -35,7 +35,6 @@ public class EditUserCommand implements Command {
             String newUserName = request.getParameter("userName");
             if ((userService.isExistUser(newUserName) && !newUserName.equals(user.getUserName()))
                     || request.getAttribute("regexFalseOrTrue").equals("false")){
-                System.out.println("exist");
                 user.setUserName(newUserName);
                 request.setAttribute("user", user);
                 return PageConstants.EDIT_USER_PAGE;

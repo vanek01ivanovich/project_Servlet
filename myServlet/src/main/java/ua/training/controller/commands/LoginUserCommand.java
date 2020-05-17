@@ -12,17 +12,16 @@ import static ua.training.controller.constants.PageConstants.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.stream.Stream;
 
 public class LoginUserCommand implements Command {
     private DaoFactory factory = DaoFactory.getInstance();
     private UserDao userDao = factory.createUserDao();
-    private UserService userService;
-    private UserSessionSecurity userSessionSecurity;
+    private  UserSessionSecurity userSessionSecurity;
 
-    public LoginUserCommand(UserService userService, UserSessionSecurity userSessionSecurity) {
-        this.userService = userService;
+    public LoginUserCommand(UserSessionSecurity userSessionSecurity) {
         this.userSessionSecurity = userSessionSecurity;
-        }
+    }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -30,35 +29,18 @@ public class LoginUserCommand implements Command {
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
 
-        System.out.println(userName);
-
-
-
         if (!request.getMethod().equalsIgnoreCase("post")){
             return "WEB-INF/view/login.jsp";
         }else {
-
-            User user = userDao.checkLogin(userName, password);
-            if (user != null && userService.checkPassword(user,password)){
+            User user = userDao.checkLogin(userName);
+            if (user != null && userSessionSecurity.checkPassword(user,password)){
                 UserSessionSecurity.addLoggedUser(session,user);
-                if (user.getRole().equals("ROLE_USER")) {
-                    //UserSessionSecurity.addLoggedUser(session,user);
-                    /*session.setAttribute("login", true);
-                    session.setAttribute("user", user);*/
-                    request.setAttribute("redirect", "/user");
-                } else {
-                   /* session.setAttribute("login", true);
-                    session.setAttribute("user", user);*/
-                    request.setAttribute("redirect", "/admin");
-                }
-
+                request.setAttribute("redirect", user.getRole().equals("ROLE_USER") ? "/user":"/admin");
                 return null;
-
             } else {
+                request.setAttribute("errorLogin",true);
                 return "WEB-INF/view/login.jsp";
             }
         }
-
-
     }
 }

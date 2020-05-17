@@ -32,15 +32,15 @@
         <a class="navbar-brand" href="/user">HOME</a>
 
         <form action="/logout">
-            <button id="logout" type="submit" class="btn btn-outline-warning">logout</button>
+            <button id="logout" type="submit" class="btn btn-outline-warning"><fmt:message key="logout"/></button>
         </form>
         <div class="dropdown">
             <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Languages
+                <fmt:message key="languages"/>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="?lang=en">English</a>
-                <a class="dropdown-item" href="?lang=ua">Ukrainian</a>
+                <a class="dropdown-item" href="?lang=en"><fmt:message key="english"/></a>
+                <a class="dropdown-item" href="?lang=ua"><fmt:message key="ukr.last.name"/></a>
             </div>
         </div>
     </nav>
@@ -50,37 +50,36 @@
     <div class="row">
         <div class="col-sm ">
             <form method="post">
-
                 <div class="form-row">
                     <div class="col">
-                        <h3>Departure</h3>
+                        <h3><fmt:message key="departure"/></h3>
                         <input name="stationFrom" type="text" class="form-control" placeholder="Departure">
                     </div>
                     <div class="col">
-                        <h3>Arrival</h3>
+                        <h3><fmt:message key="arrival"/></h3>
                         <input name="stationTo" type="text" class="form-control" placeholder="Arrival">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="col">
-                        <h3>Date</h3>
+                        <h3><fmt:message key="date"/></h3>
                         <input name="date" type="date" class="form-control" placeholder="Date" id="date">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Find Routes</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block"><fmt:message key="find.routes"/></button>
 
             </form>
         </div>
     </div>
     <c:if test="${emptyMessage == true}">
         <div class="alert alert-danger" role="alert">
-            Not Found
+            <fmt:message key="not.found"/>
         </div>
     </c:if>
 </div>
 <footer class="text-white bg-dark">
-    <div id="footer" class="card-footer text-muted text-white bg-dark">© 2020 Copyright:All rights reserved</div>
+    <div id="footer" class="card-footer text-muted text-white bg-dark"><fmt:message key="footer"/></div>
 </footer>
 
 </body>

@@ -16,7 +16,7 @@ public class JDBCApplicationDao implements ApplicationDao {
     final String sqlInsertApplication = "insert into applications(users_idusers," +
             "departure,arrival,date_departure) values(?,?,?,?)";
 
-    final String sqlInsertUkrainianApplication = "insert into applications(users_idusers," +
+    private final String sqlInsertUkrainianApplication = "insert into applications(users_idusers," +
             "departureUA,arrivalUA,date_departure) values(?,?,?,?)";
 
     final String sqlExtractFromDestination = "select * from destinations " +

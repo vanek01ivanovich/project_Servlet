@@ -13,7 +13,6 @@ import java.util.List;
 
 public class TicketCommand implements Command {
     private TicketService ticketService;
-    private Ticket ticket = new Ticket();
     private static String idProperty;
 
     public TicketCommand(TicketService ticketService){

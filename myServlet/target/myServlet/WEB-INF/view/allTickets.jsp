@@ -36,15 +36,15 @@
         <a class="navbar-brand" href="/admin">Navbar</a>
 
         <form action="/logout">
-            <button id="logout" type="submit" class="btn btn-outline-warning">logout</button>
+            <button id="logout" type="submit" class="btn btn-outline-warning"><fmt:message key="logout"/></button>
         </form>
         <div class="dropdown">
             <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Languages
+                <fmt:message key="languages"/>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="?lang=en">English</a>
-                <a class="dropdown-item" href="?lang=ua">Ukrainian</a>
+                <a class="dropdown-item" href="?lang=en"><fmt:message key="english"/></a>
+                <a class="dropdown-item" href="?lang=ua"><fmt:message key="ukrainian"/></a>
             </div>
         </div>
     </nav>
@@ -53,16 +53,16 @@
 <table class="table table-striped">
     <thead class="thead-dark">
         <tr>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Departure</th>
-            <th scope="col">Arrival</th>
-            <th scope="col">Date Departure</th>
-            <th scope="col">Time Departure</th>
-            <th scope="col">Date Arrival</th>
-            <th scope="col">Time Arrival</th>
-            <th scope="col">Train</th>
-            <th scope="col">Price</th>
+            <th scope="col"><fmt:message key="first.name"/></th>
+            <th scope="col"><fmt:message key="last.name"/></th>
+            <th scope="col"><fmt:message key="departure"/></th>
+            <th scope="col"><fmt:message key="arrival"/></th>
+            <th scope="col"><fmt:message key="date.departure"/></th>
+            <th scope="col"><fmt:message key="time.departure"/></th>
+            <th scope="col"><fmt:message key="date.arrival"/></th>
+            <th scope="col"><fmt:message key="time.arrival"/></th>
+            <th scope="col"><fmt:message key="train"/></th>
+            <th scope="col"><fmt:message key="price"/></th>
         </tr>
     </thead>
     <tbody>
@@ -119,6 +119,9 @@
         </c:forEach>
     </tbody>
 </table>
+<footer class="text-white bg-dark">
+    <div id="footer" class="card-footer text-muted text-white bg-dark"><fmt:message key="footer"/></div>
+</footer>
 
 </body>
 </html>

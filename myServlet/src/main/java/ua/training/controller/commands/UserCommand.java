@@ -12,23 +12,12 @@ import javax.servlet.http.HttpSession;
 public class UserCommand implements Command{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-       /* DaoFactory factory = DaoFactory.getInstance();
-        UserDao userDao = factory.createUserDao();
-        BcryptEncoder bcryptEncoder = new BcryptEncoder();*/
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        //String userName = session.getAttribute("userName").toString();
-        //String password = session.getAttribute("password").toString();
-
-        System.out.println("USERCOMMAND = " + user.getRole());
-
-
         if (user.getRole() == null){
             return "WEB-INF/view/login.jsp";
-        }
-        else if (user.getRole().equals("ROLE_USER")){
+        }else if (user.getRole().equals("ROLE_USER")){
             request.setAttribute("user",user);
             return "WEB-INF/view/user.jsp";
         }else{

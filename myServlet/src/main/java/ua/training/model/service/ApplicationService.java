@@ -21,9 +21,6 @@ public class ApplicationService {
         String arrival = request.getParameter("stationTo");
         String date = request.getParameter("date");
 
-        System.out.println(departure);
-        System.out.println(arrival);
-
         application.setDateDeparture(date);
         application.setIdUser(user.getId());
 
@@ -40,15 +37,4 @@ public class ApplicationService {
 
 
     }
-    /*private String getFormatDate(String city) throws ParseException {
-        java.util.Date dateCity = city.getDateU();
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat format = new SimpleDateFormat(pattern);
-        DateFormat format1 = new SimpleDateFormat(pattern);
-        String mysqlDateString = format.format(dateCity);
-
-        city.setDate(mysqlDateString);
-
-        return city;
-    }*/
 }

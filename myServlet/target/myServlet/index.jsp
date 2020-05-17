@@ -37,8 +37,8 @@
                <fmt:message key="languages"/>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="?lang=en">English</a>
-                <a class="dropdown-item" href="?lang=ua">Ukrainian</a>
+                <a class="dropdown-item" href="?lang=en"><fmt:message key="english"/></a>
+                <a class="dropdown-item" href="?lang=ua"><fmt:message key="ukrainian"/></a>
             </div>
         </div>
     </nav>
@@ -48,7 +48,7 @@
 
 <ul class="nav justify-content-center">
     <li class="nav-item">
-        <a class="btn btn-light" href="/login" role="button"> <fmt:message key="login"/></a>
+        <a class="btn btn-light" href="/login" role="button"><fmt:message key="login"/></a>
     </li>
 </ul>
 

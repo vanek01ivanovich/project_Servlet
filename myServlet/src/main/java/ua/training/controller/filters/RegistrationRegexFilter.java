@@ -19,11 +19,11 @@ public class RegistrationRegexFilter implements Filter, RegexPatternConstants {
     private String lastNameUkr;
     private String role;
 
-    static boolean validFirstName;
-    static boolean validLastName;
-    static boolean validFirstNameUkr;
-    static boolean validLastNameUkr;
-    static boolean validUserName;
+    private static boolean validFirstName;
+    private static boolean validLastName;
+    private static boolean validFirstNameUkr;
+    private static boolean validLastNameUkr;
+    private static boolean validUserName;
 
 
     @Override
@@ -41,12 +41,10 @@ public class RegistrationRegexFilter implements Filter, RegexPatternConstants {
         if (request.getMethod().equalsIgnoreCase("POST")){
             getAllRequestParametrs(request);
             if (isValid(request)){
-                System.out.println("valid");
                 request.setAttribute("regexFalseOrTrue","true");
                 filterChain.doFilter(request,response);
             }else{
                 request.setAttribute("regexFalseOrTrue","false");
-                System.out.println("Invalid");
                 filterChain.doFilter(request,response);
             }
 

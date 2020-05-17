@@ -27,17 +27,15 @@
 
 
 
-<!--
-  <filter>
+<!--  <filter>
     <filter-name>LogoutFilter</filter-name>
     <filter-class>ua.training.controller.filters.LogoutFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>LogoutFilter</filter-name>
-  &lt;!&ndash;  <url-pattern>/logout</url-pattern>&ndash;&gt;
+    <url-pattern>/logout</url-pattern>
     &lt;!&ndash;<url-pattern>/logout</url-pattern>&ndash;&gt;
-  </filter-mapping>
--->
+  </filter-mapping>-->
 
 
   <filter>
@@ -88,8 +86,13 @@
 
   <!--<error-page>
     <error-code>500</error-code>
+    <location>/WEB-INF/view/error500.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
     <location>/WEB-INF/view/error404.jsp</location>
   </error-page>-->
+
 
 
   <welcome-file-list>

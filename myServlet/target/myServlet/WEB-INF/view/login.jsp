@@ -34,18 +34,28 @@
 
         <div class="dropdown">
             <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Languages
+                <fmt:message key="languages"/>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="?lang=en">English</a>
-                <a class="dropdown-item" href="?lang=ua">Ukrainian</a>
+                <a class="dropdown-item" href="?lang=en"><fmt:message key="english"/></a>
+                <a class="dropdown-item" href="?lang=ua"><fmt:message key="ukrainian"/></a>
             </div>
         </div>
     </nav>
 
 </header>
-<div class="container card text-center ">
 
+<div class="container card text-center ">
+    <c:if test="${errorLogin==true}">
+        <div class="alert alert-danger" role="alert">
+            <fmt:message key="error"/>
+        </div>
+    </c:if>
+    <c:if test="${logoutMessage==true}">
+        <div class="alert alert-info" role="alert">
+            <fmt:message key="logout"/>
+        </div>
+    </c:if>
     <div class="card-header bg-warning">
         <h2>
             <fmt:message key="login.initial"/>
@@ -57,24 +67,26 @@
 
 
         <form action="/login" method="post">
-            <label>UserName:
+            <label>
+                <fmt:message key="user.name"/>
                 <input type="text" name="userName" placeholder="Username" class="form-control">
            </label>
             <br><br>
-            <label >Password:
+            <label >
+                <fmt:message key="password"/>
                 <input type="password" class="form-control" placeholder="Password" name="password">
             </label>
 
             <br><br>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="login"/></button>
         </form>
         <form action="/registration">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Registration</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="registration"/></button>
         </form>
     </div>
 </div>
 <footer class="text-white bg-dark">
-    <div id="footer" class="card-footer text-muted text-white bg-dark">© 2020 Copyright:All rights reserved</div>
+    <div id="footer" class="card-footer text-muted text-white bg-dark"><fmt:message key="footer"/></div>
 </footer>
 </body>
 </html>

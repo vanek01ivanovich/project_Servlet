@@ -33,15 +33,15 @@
         <a class="navbar-brand" href="/user">HOME</a>
 
         <form action="/logout">
-            <button id="logout" type="submit" class="btn btn-outline-warning">logout</button>
+            <button id="logout" type="submit" class="btn btn-outline-warning"><fmt:message key="logout"/></button>
         </form>
         <div class="dropdown">
             <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Languages
+                <fmt:message key="languages"/>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="?lang=en">English</a>
-                <a class="dropdown-item" href="?lang=ua">Ukrainian</a>
+                <a class="dropdown-item" href="?lang=en"><fmt:message key="english"/></a>
+                <a class="dropdown-item" href="?lang=ua"><fmt:message key="ukrainian"/></a>
             </div>
         </div>
     </nav>
@@ -49,23 +49,23 @@
 <form action="/ticket" method="post">
 <div class="container card text-center">
     <div class="card-header">
-        Ticket
+        <fmt:message key="ticket"/>
     </div>
     <div class="card-body">
 
             <input type="hidden" name="idProperty" value="${ticket.getIdProperty()}">
             <div class="info">
-                <span>First name</span>
+                <span><fmt:message key="first.name"/></span>
                 ${user.getFirstName()}
             </div>
 
             <div class="info">
-                <span>Last name</span>
+                <span><fmt:message key="last.name"/></span>
                 ${user.getLastName()}
             </div>
 
             <div class="info">
-                <span>Departure</span>
+                <span><fmt:message key="departure"/></span>
                 <c:if test="${lang == 'en'}">
                     <c:forEach items="${ticket.getDestinations()}" var="tick">
                         <c:out value="${tick.getDeparture()}"/>
@@ -80,7 +80,7 @@
             </div>
 
             <div class="info">
-                <span>Arrival</span>
+                <span><fmt:message key="arrival"/></span>
                 <c:if test="${lang == 'en'}">
                     <c:forEach items="${ticket.getDestinations()}" var="tick">
                         <c:out value="${tick.getArrival()}"/>
@@ -95,21 +95,21 @@
             </div>
 
             <div class="info">
-                <span>Date/Time departure</span>
+                <span><fmt:message key="date"/>/<fmt:message key="time.departure"/>e</span>
                 <c:out value="${ticket.getDateDeparture()}"/>
                 /
                 <c:out value="${ticket.getTimeDeparture()}"/>
             </div>
 
             <div class="info">
-                <span>Date/Time Arrival</span>
+                <span><fmt:message key="date"/>/<fmt:message key="time.arrival"/></span>
                 <c:out value="${ticket.getDateArrival()}"/>
                 /
                 <c:out value="${ticket.getTimeArrival()}"/>
             </div>
 
             <div class="info">
-                <span>Train</span>
+                <span><fmt:message key="train"/></span>
                 <c:if test="${lang == 'en'}">
                     <c:forEach items="${ticket.getTrains()}" var="train">
                         <c:out value="${train.getTrainName()}"/>
@@ -125,14 +125,14 @@
             </div>
 
             <div class="info">
-                <span>Price</span>
+                <span><fmt:message key="price"/></span>
                 <c:out value="${ticket.getPrice()}"/>
             </div>
 
     </div>
 
     <div class="card-footer text-muted">
-        <button type="submit" class="btn btn-outline-primary waves-effect" >Choose</button>
+        <button type="submit" class="btn btn-outline-primary waves-effect" ><fmt:message key="choose"/></button>
 
     </div>
 

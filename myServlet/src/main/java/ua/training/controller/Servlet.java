@@ -24,15 +24,14 @@ public class Servlet extends  HttpServlet {
     private DestinationPropertyService destinationPropertyService = new DestinationPropertyService();
     private ApplicationService applicationService = new ApplicationService();
     private TicketService ticketService = new TicketService();
-    private static UserSessionSecurity userSessionSecurity = new UserSessionSecurity();
+    private UserSessionSecurity userSessionSecurity = new UserSessionSecurity();
 
     @Override
     public void init(){
-        System.out.println("init");
         commands.put("user",new UserCommand());
         commands.put("admin",new UserCommand());
-        commands.put("login",new LoginUserCommand(userService,userSessionSecurity));
-        commands.put("logout",new LogoutUserCommand());
+        commands.put("login",new LoginUserCommand(userSessionSecurity));
+        commands.put("logout",new LogoutUserCommand(userSessionSecurity));
         commands.put("registration",new RegistrationCommand(userService));
         commands.put("findroute",new FindRouteCommand(destinationPropertyService,applicationService));
         commands.put("routes",new RoutesCommand());
@@ -41,6 +40,17 @@ public class Servlet extends  HttpServlet {
         commands.put("allTickets",new LookAllTicketsCommand(ticketService));
         commands.put("editUser",new EditUserCommand(userService));
     }
+
+    /*
+    * TODO log4j
+    * TODO unitTest
+    * TODO javaDOC
+    * TODO DataBase info
+    * TODO make java8
+    * TODO constants
+    * TODO session language after logout(problem with invalidate Session)*/
+
+
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -52,29 +62,15 @@ public class Servlet extends  HttpServlet {
         processRequest(request,response);
 
     }
-
-    //TODO regex on everything
-    //TODO button click back after logout disable
-    //TODO right url (/user/findticket)
-    //TODO forbid to redirect from user to admin etc.
-
     private void processRequest(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 
         String path = request.getRequestURI();
 
-        HttpSession session = request.getSession();
-
         path = path.replaceAll(".*/","");
-        System.out.println(path);
-
-
-
 
         Command command = commands.get(path);
         String page = command.execute(request,response);
         if (page == null){
-
-            //session = request.getSession();
             response.sendRedirect(request.getAttribute("redirect").toString());
         }else {
 

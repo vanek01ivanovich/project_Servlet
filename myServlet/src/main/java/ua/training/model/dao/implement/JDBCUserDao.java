@@ -34,7 +34,7 @@ public class JDBCUserDao implements UserDao {
 
 
     @Override
-    public User checkLogin(String userName, String password){
+    public User checkLogin(String userName){
         User user = null;
         try (PreparedStatement preparedStatement =
                 connection.prepareStatement("SELECT * FROM users" +
@@ -47,9 +47,6 @@ public class JDBCUserDao implements UserDao {
             if(resultSet.next()){
                 user = userMapper.extractFromResultSet(resultSet);
 
-                /*if (!encoder.checkPass(password,user.getPassword())){
-                    return null;
-                }*/
             }
 
         }catch (Exception e){
@@ -77,12 +74,12 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void saveNewUser(HttpServletRequest request) {
-        //String insertSqlRequest = "insert into users values(?,?,?,?,?,?)";
+
         String insertSqlRequest = "insert into users(first_name,last_name,first_name_ukr,last_name_ukr,users.role,users.password,user_name)" +
                 "values(?,?,?,?,?,?,?)";
         try (PreparedStatement preparedStatement =
                 connection.prepareStatement(insertSqlRequest)){
-                //preparedStatement.setInt(1,3);
+
                 preparedStatement.setString(1,request.getParameter("firstName"));
                 preparedStatement.setString(2,request.getParameter("lastName"));
                 preparedStatement.setString(3,request.getParameter("ukrFirstName"));

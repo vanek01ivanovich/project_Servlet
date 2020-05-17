@@ -48,7 +48,6 @@ public class FindRouteCommand implements Command {
 
             }else{
                 request.setAttribute("emptyMessage",true);
-                System.out.println("EMpty");
                 return "WEB-INF/view/findRoute.jsp";
             }
 

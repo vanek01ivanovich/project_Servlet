@@ -9,6 +9,6 @@ public class test {
   public static void main(String[] args) {
       Pattern pattern = Pattern.compile(".*\\\\S+.");
       String test = null;
-      System.out.println(test.isEmpty());
+
   }
 }

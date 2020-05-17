@@ -9,7 +9,7 @@ public class Train {
     private int idTrain;
     private String trainName;
     private String trainNameUA;
-    //private List<Destination> destinations= new ArrayList<>();
+
 
     public int getIdTrain() {
         return idTrain;
@@ -27,14 +27,7 @@ public class Train {
         this.trainName = trainName;
     }
 
-   /* public List<Destination> getDestinations() {
-        return destinations;
-    }
 
-    public void setDestinations(List<Destination> destinations) {
-        this.destinations = destinations;
-    }
-*/
 
 
     public String getTrainNameUA() {

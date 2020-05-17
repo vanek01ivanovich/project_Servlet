@@ -32,10 +32,17 @@
         <a class="navbar-brand" href="/user">Navbar</a>
 
         <form action="/findroute" id="buttonRoutes">
-            <button type="submit">Find another routes</button>
+            <button type="submit"><fmt:message key="find.another.routes"/></button>
         </form>
-        <a href="?lang=en">EN</a>
-        <a href="?lang=ua">UA</a>
+        <div class="dropdown">
+            <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <fmt:message key="languages"/>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="?lang=en"><fmt:message key="english"/></a>
+                <a class="dropdown-item" href="?lang=ua"><fmt:message key="ukrainian"/></a>
+        </div>
+    </div>
     </nav>
 </header>
 
@@ -54,14 +61,14 @@
                                     <c:forEach items="${routes.getDestinations()}" var="destination">
                                         ${destination.getDeparture()}
                                         <br>
-                                        <span>Departure</span>
+                                        <span><fmt:message key="departure"/></span>
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${lang == 'ua'}">
                                     <c:forEach items="${routes.getDestinations()}" var="destination">
                                         ${destination.getDepartureUA()}
                                         <br>
-                                        <span>Departure</span>
+                                        <span><fmt:message key="departure"/></span>
                                     </c:forEach>
                                 </c:if>
                                 <br>
@@ -74,14 +81,14 @@
                                     <c:forEach items="${routes.getDestinations()}" var="destination">
                                         ${destination.getArrival()}
                                         <br>
-                                        <span>Arrival</span>
+                                        <span><fmt:message key="arrival"/></span>
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${lang == 'ua'}">
                                     <c:forEach items="${routes.getDestinations()}" var="destination">
                                         ${destination.getArrivalUA()}
                                         <br>
-                                        <span>Arrival</span>
+                                        <span><fmt:message key="arrival"/></span>
                                     </c:forEach>
                                 </c:if>
                                 <br>
@@ -92,19 +99,19 @@
                             <th>
                                 <c:if test="${lang == 'en'}">
                                     <c:forEach items="${routes.getTrains()}" var="destination">
-                                        <h5>Train</h5>
+                                        <h5><fmt:message key="train"/></h5>
                                         ${destination.getTrainName()}
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${lang == 'ua'}">
                                     <c:forEach items="${routes.getTrains()}" var="destination">
-                                        <h5>Train</h5>
+                                        <h5><fmt:message key="train"/></h5>
                                         ${destination.getTrainNameUA()}
                                     </c:forEach>
                                 </c:if>
                             </th>
                             <th>
-                                <h5>Price</h5>
+                                <h5><fmt:message key="price"/></h5>
                                 ${routes.getPrice()}
                             </th>
 
@@ -118,7 +125,7 @@
     </div>
 
 <footer class="text-white bg-dark">
-    <div id="footer" class="card-footer text-muted text-white bg-dark">© 2020 Copyright:All rights reserved</div>
+    <div id="footer" class="card-footer text-muted text-white bg-dark"><fmt:message key="footer"/></div>
 </footer>
 
 </body>

@@ -9,6 +9,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="messages"/>
+
 <html>
 <head>
     <title>Title</title>
@@ -29,15 +32,15 @@
         <a class="navbar-brand" href="/admin">HOME</a>
 
         <form action="/logout">
-            <button id="logout" type="submit" class="btn btn-outline-warning">logout</button>
+            <button id="logout" type="submit" class="btn btn-outline-warning"><fmt:message key="logout"/></button>
         </form>
         <div class="dropdown">
             <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Languages
+                <fmt:message key="languages"/>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="?lang=en">English</a>
-                <a class="dropdown-item" href="?lang=ua">Ukrainian</a>
+                <a class="dropdown-item" href="?lang=en"><fmt:message key="english"/></a>
+                <a class="dropdown-item" href="?lang=ua"><fmt:message key="ukrainian"/></a>
             </div>
         </div>
     </nav>
@@ -46,10 +49,10 @@
 <table class="table table-striped">
     <thead class="thead-dark">
     <tr>
-        <th scope="col">UserName</th>
-        <th scope="col">FirstName</th>
-        <th scope="col">LAstNAme</th>
-        <th scope="col" >Role</th>
+        <th scope="col"><fmt:message key="user.name"/></th>
+        <th scope="col"><fmt:message key="first.name"/></th>
+        <th scope="col"><fmt:message key="last.name"/></th>
+        <th scope="col" ><fmt:message key="role"/></th>
         <th scope="col"></th>
         <th scope="col"></th>
     </tr>
@@ -66,8 +69,8 @@
                         <th scope="row"> <c:out value="${users.getLastName()}"/></th>
                     </c:if>
                     <c:if test="${lang == 'ua'}">
-                        <th scope="row"> <c:out value="${users.getFirstNameUA()}"/></th>
-                        <th scope="row"> <c:out value="${users.getLastNameUA()}"/></th>
+                        <th scope="row"> <c:out value="${users.getFirstNameUkr()}"/></th>
+                        <th scope="row"> <c:out value="${users.getLastNameUkr()}"/></th>
                     </c:if>
 
                     <th scope="row"> <c:out value="${users.getRole()}"/></th>
@@ -84,20 +87,8 @@
 </table>
 
 <footer class="text-white bg-dark">
-    <div id="footer" class="card-footer text-muted text-white bg-dark">© 2020 Copyright:All rights reserved</div>
+    <div id="footer" class="card-footer text-muted text-white bg-dark"><fmt:message key="footer"/></div>
 </footer>
 
-   <%-- <c:forEach items="${allUsers}" var="users">
-
-        <c:out value="${users.getUserName()}"/>
-        <form action="/admin/allUsers/editUser">
-            <input type="hidden" name="userId" value="${users.getId()}">
-            <button type="submit">edit</button>
-        </form>
-        <form action="/admin/allUsers" method="post">
-            <button type="submit">delete</button>
-        </form>
-        <br>
-    </c:forEach>--%>
 </body>
 </html>
