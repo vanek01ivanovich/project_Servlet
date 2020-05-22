@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static ua.training.controller.constants.RequestConstants.*;
+import static ua.training.controller.constants.PageConstants.*;
+import static ua.training.controller.constants.CommandsUrlConstants.*;
+
 public class LogoutUserCommand implements Command{
 
     private UserSessionSecurity userSessionSecurity;
@@ -21,8 +25,8 @@ public class LogoutUserCommand implements Command{
         HttpSession session = request.getSession();
 
         userSessionSecurity.removeUserSession(session);
-        request.setAttribute("logoutMessage",true);
-        return "WEB-INF/view/login.jsp";
+        request.setAttribute(LOGOUT_ATTRIBUTE,true);
+        return LOGIN_PAGE;
 
     }
 }

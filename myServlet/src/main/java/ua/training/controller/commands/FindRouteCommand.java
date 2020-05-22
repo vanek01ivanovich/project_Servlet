@@ -12,6 +12,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+import static ua.training.controller.constants.RequestConstants.*;
+import static ua.training.controller.constants.PageConstants.*;
+import static ua.training.controller.constants.CommandsUrlConstants.*;
+
 public class FindRouteCommand implements Command {
 
     private HttpSession session;
@@ -29,32 +33,32 @@ public class FindRouteCommand implements Command {
         session = request.getSession();
 
 
-        if(request.getMethod().equalsIgnoreCase("post")){
+        if(request.getMethod().equalsIgnoreCase(POST_METHOD)){
 
 
-            List<DestinationProperty> destinationProperties = session.getAttribute("lang").equals("en") ?
+            List<DestinationProperty> destinationProperties = session.getAttribute(LANG_ATTRIBUTE).equals(ENGLISH_ATTRIBUTE) ?
                     destinationPropertyService.getDestinations( applicationService.addApplication(request)) :
                     destinationPropertyService.getDestinationsByUkrainianApplication(applicationService.addApplication(request));
 
 
             if (!destinationProperties.isEmpty()){
 
-                request.setAttribute("page",request.getParameter("page"));
-                request.setAttribute("emptyMessage",false);
-                session.setAttribute("listRoutes",destinationProperties);
+                request.setAttribute(PAGE_ATTRIBUTE,request.getParameter(PAGE_ATTRIBUTE));
+                request.setAttribute(EMPTY_MESSAGE_ATTRIBUTE,false);
+                session.setAttribute(LIST_ROUTES_ATTRIBUTE,destinationProperties);
 
-                request.setAttribute("redirect","/routes");
+                request.setAttribute(REDIRECT_ATTRIBUTE,"/routes");
               return null;
 
             }else{
-                request.setAttribute("emptyMessage",true);
-                return "WEB-INF/view/findRoute.jsp";
+                request.setAttribute(EMPTY_MESSAGE_ATTRIBUTE,true);
+                return FIND_ROUTE_PAGE;
             }
 
 
         }else{
 
-            return "WEB-INF/view/findRoute.jsp";
+            return FIND_ROUTE_PAGE;
         }
     }
 }

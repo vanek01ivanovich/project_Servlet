@@ -23,6 +23,9 @@ public class JDBCDestinationPropertyDao implements DestinationPropertyDao {
     private TrainMapper trainMapper;
 
     private ResourceBundle resourceBundle = ResourceBundle.getBundle("databaseRequest");
+    private final String FIND_DESTINATION_PROPERTY_BY_STATION_AND_DATE= "find.destination.property.by.station.and.date";
+    private final String FIND_DESTINATION_PROPERTY_BY_UKRAINIAN_STATION_AND_DATE= "find.destination.property.by.ukrainian.station.and.date";
+
     JDBCDestinationPropertyDao(Connection connection){
         this.connection = connection;
     }
@@ -48,21 +51,6 @@ public class JDBCDestinationPropertyDao implements DestinationPropertyDao {
     }
 
 
-    private final String FIND_DESTINATION_PROPERTY_BY_STATION_AND_DATE= "find.destination.property.by.station.and.date";
-    private final String FIND_DESTINATION_PROPERTY_BY_UKRAINIAN_STATION_AND_DATE= "find.destination.property.by.ukrainian.station.and.date";
-
-    final String sqlFindByStationsAndDate = "SELECT  destinations.*,property.*,train.* " +
-            "FROM myrailwaydb.property join destinations on property.destinations_iddestinations = destinations.iddestinations " +
-            "join train on property.train_idtrain = train.idtrain where departure = ? and " +
-            "arrival = ? and date_departure = ?";
-
-    final String sqlFindByUkrainianStationsAndDate = "SELECT  destinations.*,property.*,train.* " +
-            "FROM myrailwaydb.property join destinations on property.destinations_iddestinations = destinations.iddestinations " +
-            "join train on property.train_idtrain = train.idtrain where departureUA = ? and " +
-            "arrivalUA = ? and date_departure = ?";
-
-
-
 
     @Override
     public List<DestinationProperty> findAllByApplication(Application application) {
@@ -73,25 +61,6 @@ public class JDBCDestinationPropertyDao implements DestinationPropertyDao {
             preparedStatement.setString(1,application.getDeparture());
             preparedStatement.setString(2,application.getArrival());
             findStaff(preparedStatement,destinationMap,application);
-           /* preparedStatement.setString(3,application.getDateDeparture());
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            propertyMapper = new PropertyMapper();
-            destinationsMapper = new DestinationsMapper();
-            trainMapper = new TrainMapper();
-
-            while (resultSet.next()){
-                DestinationProperty destinationProperty = propertyMapper.extractFromResultSet(resultSet);
-                Destinations destination = destinationsMapper.extractFromResultSet(resultSet);
-                Train train = trainMapper.extractFromResultSet(resultSet);
-
-                destinationProperty.getDestinations().add(destination);
-                destinationProperty.getTrains().add(train);
-
-                propertyMapper.putValuesToMap(destinationMap,destinationProperty);
-
-            }*/
             return new ArrayList<>(destinationMap.values());
         }catch (SQLException e){
             e.printStackTrace();
@@ -108,24 +77,6 @@ public class JDBCDestinationPropertyDao implements DestinationPropertyDao {
             preparedStatement.setString(1,application.getDepartureUA());
             preparedStatement.setString(2,application.getArrivalUA());
             findStaff(preparedStatement,destinationMap,application);
-            /*preparedStatement.setString(3,application.getDateDeparture());
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            propertyMapper = new PropertyMapper();
-            destinationsMapper = new DestinationsMapper();
-            trainMapper = new TrainMapper();
-
-            while (resultSet.next()){
-                DestinationProperty destinationProperty = propertyMapper.extractFromResultSet(resultSet);
-                Destinations destination = destinationsMapper.extractFromResultSet(resultSet);
-                Train train = trainMapper.extractFromResultSet(resultSet);
-
-                destinationProperty.getDestinations().add(destination);
-                destinationProperty.getTrains().add(train);
-
-                propertyMapper.putValuesToMap(destinationMap,destinationProperty);
-
-            }*/
             return new ArrayList<>(destinationMap.values());
         } catch (SQLException e) {
             e.printStackTrace();

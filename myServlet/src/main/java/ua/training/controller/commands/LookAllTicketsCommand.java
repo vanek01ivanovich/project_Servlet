@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+import static ua.training.controller.constants.RequestConstants.*;
+import static ua.training.controller.constants.PageConstants.*;
+import static ua.training.controller.constants.CommandsUrlConstants.*;
+
 public class LookAllTicketsCommand implements Command {
 
     private TicketService ticketService;
@@ -19,7 +23,7 @@ public class LookAllTicketsCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         List<User> userAndTickets = ticketService.getAllUsersTickets();
-        request.setAttribute("allTickets",userAndTickets);
-        return "/WEB-INF/view/allTickets.jsp";
+        request.setAttribute(ALL_TICKET_ATTRIBUTE,userAndTickets);
+        return ALL_TICKETS_PAGE;
     }
 }

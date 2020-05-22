@@ -2,6 +2,8 @@ package ua.training.controller.constants;
 
 public interface RequestConstants {
     String POST_METHOD = "post";
+    String FALSE_ATTRIBUTE = "false";
+    String TRUE_ATTRIBUTE = "true";
 
     String USER_ATTRIBUTE = "user";
     String TICKET_ATTRIBUTE = "ticket";
@@ -10,6 +12,8 @@ public interface RequestConstants {
     String LANG_ATTRIBUTE = "lang";
     String ENGLISH_ATTRIBUTE = "en";
     String UKRAINIAN_ATTRIBUTE = "ua";
+    String PAGE_ATTRIBUTE = "page";
+    String PAGINATION_LENGTH_ATTRIBUTE = "lengthPagination";
     String EMPTY_MESSAGE_ATTRIBUTE = "emptyMessage";
     String LIST_ROUTES_ATTRIBUTE = "listRoutes";
     String REDIRECT_ATTRIBUTE = "redirect";

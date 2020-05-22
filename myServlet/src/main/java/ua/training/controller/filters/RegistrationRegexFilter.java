@@ -10,6 +10,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
+import static ua.training.controller.constants.RequestConstants.*;
+import static ua.training.controller.constants.PageConstants.*;
+import static ua.training.controller.constants.CommandsUrlConstants.*;
+
 public class RegistrationRegexFilter implements Filter, RegexPatternConstants {
 
     private String firstName;
@@ -38,13 +42,13 @@ public class RegistrationRegexFilter implements Filter, RegexPatternConstants {
 
         String currentUrl = request.getRequestURI();
 
-        if (request.getMethod().equalsIgnoreCase("POST")){
+        if (request.getMethod().equalsIgnoreCase(POST_METHOD)){
             getAllRequestParametrs(request);
             if (isValid(request)){
-                request.setAttribute("regexFalseOrTrue","true");
+                request.setAttribute(REGEX_ATTRIBUTE,TRUE_ATTRIBUTE);
                 filterChain.doFilter(request,response);
             }else{
-                request.setAttribute("regexFalseOrTrue","false");
+                request.setAttribute(REGEX_ATTRIBUTE,FALSE_ATTRIBUTE);
                 filterChain.doFilter(request,response);
             }
 

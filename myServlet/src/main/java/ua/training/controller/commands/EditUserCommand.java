@@ -1,6 +1,7 @@
 package ua.training.controller.commands;
 
 import ua.training.controller.constants.PageConstants;
+import ua.training.controller.constants.RequestConstants;
 import ua.training.model.dao.entity.User;
 import ua.training.model.service.UserService;
 
@@ -9,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+import static ua.training.controller.constants.RequestConstants.*;
+import static ua.training.controller.constants.PageConstants.*;
 
 public class EditUserCommand implements Command {
 
@@ -23,36 +25,36 @@ public class EditUserCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        if (!request.getMethod().equalsIgnoreCase("post")){
-            List<User> userList = (List<User>) session.getAttribute("usersList");
+        if (!request.getMethod().equalsIgnoreCase(POST_METHOD)){
+            List<User> userList = (List<User>) session.getAttribute(USERS_LIST_ATTRIBUTES);
             user = userList.stream()
-                    .filter(u -> u.getId() == Integer.parseInt(request.getParameter("userId")))
+                    .filter(u -> u.getId() == Integer.parseInt(request.getParameter(RequestConstants.USER_ID_PARAMETER)))
                     .findAny()
                     .orElse(null);
-            request.setAttribute("user", user);
-            return "/WEB-INF/view/editUser.jsp";
+            request.setAttribute(RequestConstants.USER_ATTRIBUTE, user);
+            return EDIT_USER_PAGE;
         }else{
-            String newUserName = request.getParameter("userName");
+            String newUserName = request.getParameter(USER_NAME_PARAMETER);
             if ((userService.isExistUser(newUserName) && !newUserName.equals(user.getUserName()))
-                    || request.getAttribute("regexFalseOrTrue").equals("false")){
+                    || request.getAttribute(REGEX_ATTRIBUTE).equals(FALSE_ATTRIBUTE)){
                 user.setUserName(newUserName);
-                request.setAttribute("user", user);
-                return PageConstants.EDIT_USER_PAGE;
+                request.setAttribute(USER_ATTRIBUTE, user);
+                return EDIT_USER_PAGE;
             }else{
                 getNewUser(request);
                 userService.updateUser(user);
-                request.setAttribute("redirect","/admin/allUsers");
+                request.setAttribute(REDIRECT_ATTRIBUTE,"/admin/allUsers");
                 return null;
             }
         }
 
     }
     private void getNewUser(HttpServletRequest request){
-        user.setUserName(request.getParameter("userName"));
-        user.setFirstName(request.getParameter("firstName"));
-        user.setLastName(request.getParameter("lastName"));
-        user.setFirstNameUkr(request.getParameter("ukrFirstName"));
-        user.setLastNameUkr(request.getParameter("ukrLastName"));
-        user.setRole(request.getParameter("role"));
+        user.setUserName(request.getParameter(USER_NAME_PARAMETER));
+        user.setFirstName(request.getParameter(FIRST_NAME_PARAMETER));
+        user.setLastName(request.getParameter(LAST_NAME_PARAMETER));
+        user.setFirstNameUkr(request.getParameter(UKR_FIRST_NAME_PARAMETER));
+        user.setLastNameUkr(request.getParameter(UKR_LAST_NAME_PARAMETER));
+        user.setRole(request.getParameter(ROLE_PARAMETER));
     }
 }

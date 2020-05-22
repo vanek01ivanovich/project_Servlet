@@ -44,6 +44,7 @@ public class Servlet extends  HttpServlet {
 
     /*
      * TODO log4j
+     *  TODO alert edituser exist
      * TODO unitTest
      * TODO javaDOC
      * TODO DataBase info

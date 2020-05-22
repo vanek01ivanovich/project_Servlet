@@ -9,6 +9,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+
+import static ua.training.controller.constants.RequestConstants.*;
+import static ua.training.controller.constants.PageConstants.*;
+import static ua.training.controller.constants.CommandsUrlConstants.*;
+
 public class RoutesCommand implements Command {
 
     private static int numberOfTickets = 3;
@@ -19,22 +24,22 @@ public class RoutesCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response)  {
 
         HttpSession session = request.getSession();
-        List<?> routes = (List<?>) session.getAttribute("listRoutes");
+        List<?> routes = (List<?>) session.getAttribute(LIST_ROUTES_ATTRIBUTE);
 
         int pages = routes.size() / numberOfTickets;
         if (routes.size() % numberOfTickets != 0){
             pages++;
         }
 
-        if (request.getParameter("page") != null){
-            start = numberOfTickets*(Integer.parseInt(request.getParameter("page"))-1);
-            end = pages == Integer.parseInt(request.getParameter("page")) ? routes.size() : start+numberOfTickets;
+        if (request.getParameter(PAGE_ATTRIBUTE) != null){
+            start = numberOfTickets*(Integer.parseInt(request.getParameter(PAGE_ATTRIBUTE))-1);
+            end = pages == Integer.parseInt(request.getParameter(PAGE_ATTRIBUTE)) ? routes.size() : start+numberOfTickets;
         }
 
         //request.setAttribute("currentPage",Integer.parseInt(request.getParameter("page")));
-        request.setAttribute("lengthPagination", pages);
-        request.setAttribute("listRoutes", routes.subList(start,end));
-        return "WEB-INF/view/routes.jsp";
+        request.setAttribute(PAGINATION_LENGTH_ATTRIBUTE, pages);
+        request.setAttribute(LIST_ROUTES_ATTRIBUTE, routes.subList(start,end));
+        return ROUTES_PAGE;
 
     }
 }

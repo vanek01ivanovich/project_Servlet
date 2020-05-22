@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class JDBCTicketDao implements TicketDao {
     private Connection connection;
@@ -21,13 +22,11 @@ public class JDBCTicketDao implements TicketDao {
     private TrainMapper trainMapper;
     private DestinationsMapper destinationsMapper;
 
-    private final String sqlInsertTicket = "insert into ticket(users_idusers,property_idproperty) " +
-                                                "values(?,?)";
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("databaseRequest");
 
-    private final String sqlSelectUsersAndTickets = "SELECT ticket.idticket, users.*,destinations.*, property.*,train.* from ticket join users on " +
-            "ticket.users_idusers = users.idusers join property on ticket.property_idproperty = property.idproperty join destinations " +
-            "on  property.destinations_iddestinations = destinations.iddestinations " +
-            "join train on property.train_idtrain = train.idtrain";
+    private final String ADD_TICKET = "add.ticket";
+    private final String FIND_USERS_AND_TICKETS = "find.users.and.tickets";
+
 
 
     JDBCTicketDao(Connection connection){this.connection = connection;}
@@ -37,7 +36,7 @@ public class JDBCTicketDao implements TicketDao {
     @Override
     public void create(Ticket ticket) {
         try (PreparedStatement preparedStatement =
-                connection.prepareStatement(sqlInsertTicket)){
+                connection.prepareStatement(resourceBundle.getString(ADD_TICKET))){
 
             preparedStatement.setInt(1,ticket.getIdUser());
             preparedStatement.setInt(2,ticket.getIdDestinationProperty());
@@ -68,7 +67,7 @@ public class JDBCTicketDao implements TicketDao {
     public List<User> findAllUsersAndTickets() {
         List<User> userAndTicketsList = new ArrayList<>();
         try(PreparedStatement preparedStatement =
-                connection.prepareStatement(sqlSelectUsersAndTickets)){
+                connection.prepareStatement(resourceBundle.getString(FIND_USERS_AND_TICKETS))){
             ResultSet resultSet = preparedStatement.executeQuery();
 
             userMapper = new UserMapper();

@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static ua.training.controller.constants.RequestConstants.*;
+import static ua.training.controller.constants.PageConstants.*;
+import static ua.training.controller.constants.CommandsUrlConstants.*;
+
 public class LocaleFilter implements Filter {
 
 
@@ -28,14 +32,14 @@ public class LocaleFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
 
-        if (request.getSession().getAttribute("lang") == null) {
-            request.getSession().setAttribute("lang","en");
+        if (request.getSession().getAttribute(LANG_ATTRIBUTE) == null) {
+            request.getSession().setAttribute(LANG_ATTRIBUTE,ENGLISH_ATTRIBUTE);
 
         }
 
-        if (request.getParameter("lang") != null){
+        if (request.getParameter(LANG_ATTRIBUTE) != null){
 
-            request.getSession().setAttribute("lang",request.getParameter("lang"));
+            request.getSession().setAttribute(LANG_ATTRIBUTE,request.getParameter(LANG_ATTRIBUTE));
 
         }
 

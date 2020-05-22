@@ -1,3 +1,4 @@
+/*
 package ua.training.controller.filters;
 
 import javax.servlet.*;
@@ -32,3 +33,4 @@ public class LogoutFilter implements Filter {
 
     }
 }
+*/

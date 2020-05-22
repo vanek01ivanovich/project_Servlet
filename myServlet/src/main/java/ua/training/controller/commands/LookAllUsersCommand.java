@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+
+import static ua.training.controller.constants.RequestConstants.*;
+import static ua.training.controller.constants.PageConstants.*;
+import static ua.training.controller.constants.CommandsUrlConstants.*;
+
 public class LookAllUsersCommand implements Command {
 
     private UserService userService;
@@ -25,23 +30,23 @@ public class LookAllUsersCommand implements Command {
         String currentUrl = request.getRequestURI();
 
         HttpSession session = request.getSession();
-        if (!request.getMethod().equalsIgnoreCase("post")) {
-            user = (User) session.getAttribute("user");
+        if (!request.getMethod().equalsIgnoreCase(POST_METHOD)) {
+            user = (User) session.getAttribute(USER_ATTRIBUTE);
             listUsers = userService.findAllUsers();
             listUsers.removeIf(u -> u.getUserName().equals(user.getUserName()));
-            request.setAttribute("allUsers", listUsers);
-            session.setAttribute("usersList",listUsers);
-            return "/WEB-INF/view/allUsers.jsp";
+            request.setAttribute(ALL_USERS_ATTRIBUTE, listUsers);
+            session.setAttribute(USERS_LIST_ATTRIBUTES,listUsers);
+            return ALL_USERS_PAGE;
         }else{
             user = listUsers.stream()
-                    .filter(u -> u.getId() == Integer.parseInt(request.getParameter("userId")))
+                    .filter(u -> u.getId() == Integer.parseInt(request.getParameter(USER_ID_PARAMETER)))
                     .findAny()
                     .orElse(null);
             userService.deleteUser(user);
             listUsers.removeIf(u -> u.getUserName().equals(user.getUserName()));
-            request.setAttribute("allUsers", listUsers);
-            session.setAttribute("usersList",listUsers);
-            return "/WEB-INF/view/allUsers.jsp";
+            request.setAttribute(ALL_USERS_ATTRIBUTE, listUsers);
+            session.setAttribute(USERS_LIST_ATTRIBUTES,listUsers);
+            return ALL_USERS_PAGE;
         }
 
     }

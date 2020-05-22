@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+import static ua.training.controller.constants.RequestConstants.*;
+import static ua.training.controller.constants.PageConstants.*;
+import static ua.training.controller.constants.CommandsUrlConstants.*;
+
 public class RegistrationCommand implements Command {
 
     private UserService userService;
@@ -20,24 +24,24 @@ public class RegistrationCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response){
-        String userName = request.getParameter("userName");
+        String userName = request.getParameter(USER_NAME_PARAMETER);
 
-        if (request.getMethod().equalsIgnoreCase("post")) {
+        if (request.getMethod().equalsIgnoreCase(POST_METHOD)) {
 
             if ((userService.isExistUser(userName))) {
-                request.setAttribute("alert", 0);
-                return "WEB-INF/view/registration.jsp";
-            } else if (request.getAttribute("regexFalseOrTrue").equals("false")) {
-                request.setAttribute("alert", 1);
-                return "WEB-INF/view/registration.jsp";
+                request.setAttribute(ALERT_ATTRIBUTE, 0);
+                return REGISTRATION_PAGE;
+            } else if (request.getAttribute(REGEX_ATTRIBUTE).equals(FALSE_ATTRIBUTE)) {
+                request.setAttribute(ALERT_ATTRIBUTE, 1);
+                return REGISTRATION_PAGE;
             } else {
                 userService.saveNewUser(request);
-                request.setAttribute("redirect", "/login");
+                request.setAttribute(REDIRECT_ATTRIBUTE, "/login");
                 return null;
             }
 
         }else {
-            return "WEB-INF/view/registration.jsp";
+            return REGISTRATION_PAGE;
         }
     }
 }

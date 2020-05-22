@@ -13,19 +13,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 public class JDBCUserDao implements UserDao {
     private Connection connection;
     private UserMapper userMapper;
     private BcryptEncoder encoder = new BcryptEncoder();
 
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("databaseRequest");
 
-
-    private final String sqlDeleteUser = "delete from users where users.idusers=?";
-    private final String sqlSelectAllUsers = "select * from users";
-    private final String sqlUpdateUser = "update users set users.user_name=?," +
-                                        "users.first_name=?,users.last_name=?,users.role=? " +
-                                        "where users.idusers=?";
+    private final String DELETE_USER = "delete.user";
+    private final String FIND_ALL_USERS = "find.all.users";
+    private final String UPDATE_USERS = "update.users";
+    private final String FIND_EXIST_USERS = "find.exist.users";
+    private final String ADD_NEW_USER = "add.new.user";
 
     JDBCUserDao(Connection connection) {
         this.connection = connection;
@@ -37,8 +38,7 @@ public class JDBCUserDao implements UserDao {
     public User checkLogin(String userName){
         User user = null;
         try (PreparedStatement preparedStatement =
-                connection.prepareStatement("SELECT * FROM users" +
-                        " WHERE user_name = ?")){
+                connection.prepareStatement(resourceBundle.getString(FIND_EXIST_USERS))){
             preparedStatement.setString(1,userName);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -58,8 +58,7 @@ public class JDBCUserDao implements UserDao {
     @Override
     public boolean isExistUser(String userName) {
         try (PreparedStatement preparedStatement =
-                connection.prepareStatement("SELECT * FROM users " +
-                        "WHERE user_name = ?")){
+                connection.prepareStatement(resourceBundle.getString(FIND_EXIST_USERS))){
             preparedStatement.setString(1,userName);
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -74,12 +73,8 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void saveNewUser(HttpServletRequest request) {
-
-        String insertSqlRequest = "insert into users(first_name,last_name,first_name_ukr,last_name_ukr,users.role,users.password,user_name)" +
-                "values(?,?,?,?,?,?,?)";
         try (PreparedStatement preparedStatement =
-                connection.prepareStatement(insertSqlRequest)){
-
+                connection.prepareStatement(resourceBundle.getString(ADD_NEW_USER))){
                 preparedStatement.setString(1,request.getParameter("firstName"));
                 preparedStatement.setString(2,request.getParameter("lastName"));
                 preparedStatement.setString(3,request.getParameter("ukrFirstName"));
@@ -88,6 +83,7 @@ public class JDBCUserDao implements UserDao {
                 preparedStatement.setString(6, encoder.hashPassword(request.getParameter("password")));
                 preparedStatement.setString(7,request.getParameter("userName"));
                 preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -103,7 +99,7 @@ public class JDBCUserDao implements UserDao {
     public List<User> findAll() {
         List<User> listUserr = new ArrayList<>();
         try(PreparedStatement preparedStatement =
-                connection.prepareStatement(sqlSelectAllUsers)){
+                connection.prepareStatement(resourceBundle.getString(FIND_ALL_USERS))){
             ResultSet resultSet = preparedStatement.executeQuery();
 
             userMapper = new UserMapper();
@@ -123,7 +119,7 @@ public class JDBCUserDao implements UserDao {
     @Override
     public void update(User newUser) {
         try(PreparedStatement preparedStatement =
-                connection.prepareStatement(sqlUpdateUser)){
+                connection.prepareStatement(resourceBundle.getString(UPDATE_USERS))){
             preparedStatement.setString(1,newUser.getUserName());
             preparedStatement.setString(2,newUser.getFirstName());
             preparedStatement.setString(3,newUser.getLastName());
@@ -139,7 +135,7 @@ public class JDBCUserDao implements UserDao {
     @Override
     public void delete(User user) {
         try(PreparedStatement preparedStatement =
-                connection.prepareStatement(sqlDeleteUser)){
+                connection.prepareStatement(resourceBundle.getString(DELETE_USER))){
             preparedStatement.setInt(1,user.getId());
             preparedStatement.executeUpdate();
         }catch (SQLException ex){

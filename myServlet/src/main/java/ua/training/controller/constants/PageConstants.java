@@ -12,6 +12,4 @@ public interface PageConstants {
     String USER_PAGE = "WEB-INF/view/user.jsp";
     String ADMIN_PAGE = "WEB-INF/view/admin.jsp";
 
-
-
 }

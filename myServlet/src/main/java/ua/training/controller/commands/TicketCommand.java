@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static ua.training.controller.constants.RequestConstants.*;
+import static ua.training.controller.constants.PageConstants.*;
+import static ua.training.controller.constants.CommandsUrlConstants.*;
+
 public class TicketCommand implements Command {
     private TicketService ticketService;
     private static String idProperty;
@@ -23,23 +27,23 @@ public class TicketCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if (!request.getMethod().equalsIgnoreCase("post")) {
+        User user = (User) session.getAttribute(USER_ATTRIBUTE);
+        if (!request.getMethod().equalsIgnoreCase(POST_METHOD)) {
 
-            List<DestinationProperty> ticket = (List<DestinationProperty>) session.getAttribute("listRoutes");
+            List<DestinationProperty> ticket = (List<DestinationProperty>) session.getAttribute(LIST_ROUTES_ATTRIBUTE);
 
 
-            if (request.getParameter("idProperty") != null){
-                idProperty = request.getParameter("idProperty");
+            if (request.getParameter(ID_PROPERTY_PARAMETER) != null){
+                idProperty = request.getParameter(ID_PROPERTY_PARAMETER);
             }
 
             DestinationProperty destinationProperty = ticketService.getCurrentTicket(ticket, Integer.parseInt(idProperty));
-            request.setAttribute("user",user);
-            request.setAttribute("ticket", destinationProperty);
-            return "WEB-INF/view/ticket.jsp";
+            request.setAttribute(USER_ATTRIBUTE,user);
+            request.setAttribute(TICKET_ATTRIBUTE, destinationProperty);
+            return TICKET_PAGE;
         }else{
             ticketService.addTicket(session,request);
-            request.setAttribute("redirect","/findroute");
+            request.setAttribute(REDIRECT_ATTRIBUTE,"/findroute");
             return null;
         }
 

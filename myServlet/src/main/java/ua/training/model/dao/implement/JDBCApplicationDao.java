@@ -10,19 +10,16 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class JDBCApplicationDao implements ApplicationDao {
 
-    final String sqlInsertApplication = "insert into applications(users_idusers," +
-            "departure,arrival,date_departure) values(?,?,?,?)";
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("databaseRequest");
 
-    private final String sqlInsertUkrainianApplication = "insert into applications(users_idusers," +
-            "departureUA,arrivalUA,date_departure) values(?,?,?,?)";
+    private final String ADD_APPLICATION = "add.application";
+    private final String ADD_UKRAINIAN_APPLICATION = "add.ukrainian.application";
 
-    /*final String sqlExtractFromDestination = "select * from destinations " +
-                                             "where destinations.departure = ? and " +
-                                             "destination.arrival = ? and " +
-                                             "destination.date_departure = ?";*/
+
     private Connection connection;
 
     public JDBCApplicationDao(Connection connection){this.connection = connection;}
@@ -51,7 +48,7 @@ public class JDBCApplicationDao implements ApplicationDao {
     public Application addApplication(Application application) {
 
         try(PreparedStatement preparedStatement =
-                connection.prepareStatement(sqlInsertApplication)){
+                connection.prepareStatement(resourceBundle.getString(ADD_APPLICATION))){
                 preparedStatement.setInt(1,application.getIdUser());
                 preparedStatement.setString(2,application.getDeparture());
                 preparedStatement.setString(3,application.getArrival());
@@ -67,7 +64,7 @@ public class JDBCApplicationDao implements ApplicationDao {
     @Override
     public Application addUkrainianApplication(Application application) {
         try (PreparedStatement preparedStatement =
-                connection.prepareStatement(sqlInsertUkrainianApplication)){
+                connection.prepareStatement(resourceBundle.getString(ADD_UKRAINIAN_APPLICATION))){
                 preparedStatement.setInt(1,application.getIdUser());
                 preparedStatement.setString(2,application.getDepartureUA());
                 preparedStatement.setString(3,application.getArrivalUA());
