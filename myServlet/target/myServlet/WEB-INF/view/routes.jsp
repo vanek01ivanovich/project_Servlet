@@ -59,14 +59,14 @@
                             <th>
                                 <c:if test="${lang == 'en'}">
                                     <c:forEach items="${routes.getDestinations()}" var="destination">
-                                        ${destination.getDeparture()}
+                                        <h3>${destination.getDeparture()}</h3>
                                         <br>
                                         <span><fmt:message key="departure"/></span>
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${lang == 'ua'}">
                                     <c:forEach items="${routes.getDestinations()}" var="destination">
-                                        ${destination.getDepartureUA()}
+                                        <h3>${destination.getDepartureUA()}</h3>
                                         <br>
                                         <span><fmt:message key="departure"/></span>
                                     </c:forEach>
@@ -79,14 +79,14 @@
                             <th>
                                 <c:if test="${lang == 'en'}">
                                     <c:forEach items="${routes.getDestinations()}" var="destination">
-                                        ${destination.getArrival()}
+                                        <h3>${destination.getArrival()}</h3>
                                         <br>
                                         <span><fmt:message key="arrival"/></span>
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${lang == 'ua'}">
                                     <c:forEach items="${routes.getDestinations()}" var="destination">
-                                        ${destination.getArrivalUA()}
+                                        <h3>${destination.getArrivalUA()}</h3>
                                         <br>
                                         <span><fmt:message key="arrival"/></span>
                                     </c:forEach>
@@ -99,20 +99,20 @@
                             <th>
                                 <c:if test="${lang == 'en'}">
                                     <c:forEach items="${routes.getTrains()}" var="destination">
-                                        <h5><fmt:message key="train"/></h5>
+                                        <h3 class="secondary"><fmt:message key="train"/></h3>
                                         ${destination.getTrainName()}
                                     </c:forEach>
                                 </c:if>
                                 <c:if test="${lang == 'ua'}">
                                     <c:forEach items="${routes.getTrains()}" var="destination">
-                                        <h5><fmt:message key="train"/></h5>
+                                        <h3  class="secondary"><fmt:message key="train"/></h3>
                                         ${destination.getTrainNameUA()}
                                     </c:forEach>
                                 </c:if>
                             </th>
                             <th>
-                                <h5><fmt:message key="price"/></h5>
-                                ${routes.getPrice()}
+                                <h3 class="secondary"><fmt:message key="price"/></h3>
+                                ${routes.getPrice()} &#x20AC;
                             </th>
 
 
@@ -123,6 +123,33 @@
             </tbody>
         </table>
     </div>
+
+<%--<form action="/routes">--%>
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+
+                <a class="pag page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+
+        </li>
+        <c:forEach begin="0" end="${lengthPagination-1}" var="i">
+            <li class="page-item"><a class="pag page-link" href="?page=${i+1}">${i+1}</a></li>
+        </c:forEach>
+        <li class="page-item">
+            <a class="pag page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+
+
+
+
 
 <footer class="text-white bg-dark">
     <div id="footer" class="card-footer text-muted text-white bg-dark"><fmt:message key="footer"/></div>

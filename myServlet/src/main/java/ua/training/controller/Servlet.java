@@ -41,15 +41,15 @@ public class Servlet extends  HttpServlet {
         commands.put("editUser",new EditUserCommand(userService));
     }
 
-    /*
-    * TODO log4j
-    * TODO unitTest
-    * TODO javaDOC
-    * TODO DataBase info
-    * TODO make java8
-    * TODO constants
-    * TODO session language after logout(problem with invalidate Session)*/
 
+    /*
+     * TODO log4j
+     * TODO unitTest
+     * TODO javaDOC
+     * TODO DataBase info
+     * TODO make java8
+     * TODO constants
+     * TODO session language after logout(problem with invalidate Session)*/
 
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)

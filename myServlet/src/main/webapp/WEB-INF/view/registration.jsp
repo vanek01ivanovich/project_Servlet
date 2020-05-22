@@ -142,6 +142,14 @@
 
 <script>
     var al = document.getElementById("button").value;
+
+    if (al === "1"){
+        swal({
+            icon:"error",
+            text:"Regex"
+        });
+    }
+
     if (al === "0"){
         swal({
             icon:"error",

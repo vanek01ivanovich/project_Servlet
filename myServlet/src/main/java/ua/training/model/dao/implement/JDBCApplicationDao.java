@@ -19,10 +19,10 @@ public class JDBCApplicationDao implements ApplicationDao {
     private final String sqlInsertUkrainianApplication = "insert into applications(users_idusers," +
             "departureUA,arrivalUA,date_departure) values(?,?,?,?)";
 
-    final String sqlExtractFromDestination = "select * from destinations " +
+    /*final String sqlExtractFromDestination = "select * from destinations " +
                                              "where destinations.departure = ? and " +
                                              "destination.arrival = ? and " +
-                                             "destination.date_departure = ?";
+                                             "destination.date_departure = ?";*/
     private Connection connection;
 
     public JDBCApplicationDao(Connection connection){this.connection = connection;}

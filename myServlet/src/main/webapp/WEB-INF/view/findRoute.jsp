@@ -46,10 +46,13 @@
     </nav>
 </header>
 
+
 <div class="container card text-center">
     <div class="row">
         <div class="col-sm ">
             <form method="post">
+            <form method="post">
+                <input type="hidden" name="page" value="1">
                 <div class="form-row">
                     <div class="col">
                         <h3><fmt:message key="departure"/></h3>

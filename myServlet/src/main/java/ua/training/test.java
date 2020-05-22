@@ -7,8 +7,8 @@ import java.util.regex.Pattern;
 
 public class test {
   public static void main(String[] args) {
-      Pattern pattern = Pattern.compile(".*\\\\S+.");
-      String test = null;
+     int a = 8/3;
+  System.out.println(a%3);
 
   }
 }

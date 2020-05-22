@@ -11,6 +11,18 @@ html{
     height: 100%;
 }
 
+p.str675:after {
+    content: '\21D2';
+}
+
+h3.secondary{
+    display: block;
+}
+
+a.pag{
+    height: 38px;
+}
+
 input{
     border: none;
     outline: none;
@@ -21,6 +33,10 @@ th{
     margin: 0;
     padding: 0;
     text-align: left;
+}
+
+h3{
+    display: contents;
 }
 
 .navbar{
@@ -44,25 +60,30 @@ th{
     font-size: 20px;
 }
 
+tr{
+    background: lightyellow;
+}
+
 #button{
     vertical-align: inherit;
     margin-top: 47px;
 }
 span{
-    font-size: 9px;
+    font-size: 12px;
 }
 
 .table tbody tr {
     border: 5px solid #324037;
     border-radius: 20px;
     padding: 21px;
-    margin: 27px;
+    margin: 55px;
     display: flex;
     justify-content: space-between;
     text-align: -webkit-center;
 }
-#conten{
-    min-height: 100%;
+#content{
+   /* min-height: 100%;*/
+    height: inherit;
 }
 .table {
     width: 0;

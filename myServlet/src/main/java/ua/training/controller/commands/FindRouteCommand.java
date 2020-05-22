@@ -39,7 +39,7 @@ public class FindRouteCommand implements Command {
 
             if (!destinationProperties.isEmpty()){
 
-
+                request.setAttribute("page",request.getParameter("page"));
                 request.setAttribute("emptyMessage",false);
                 session.setAttribute("listRoutes",destinationProperties);
 

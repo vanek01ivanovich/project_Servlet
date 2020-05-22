@@ -14,7 +14,7 @@ public class PropertyMapper implements ObjectMapper<DestinationProperty> {
         destinationProperty.setIdProperty(resultSet.getInt("idproperty"));
         destinationProperty.setTimeDeparture(resultSet.getString("time_departure"));
         destinationProperty.setTimeArrival(resultSet.getString("time_arrival"));
-        destinationProperty.setDateDeparture(resultSet.getString("date_arrival"));
+        destinationProperty.setDateDeparture(resultSet.getString("date_departure"));
         destinationProperty.setDateArrival(resultSet.getString("date_arrival"));
         destinationProperty.setPrice(resultSet.getInt("price"));
         destinationProperty.setIdTrain(resultSet.getInt("train_idtrain"));

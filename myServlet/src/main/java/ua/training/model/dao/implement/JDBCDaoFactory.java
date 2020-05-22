@@ -5,8 +5,11 @@ import ua.training.model.dao.*;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class JDBCDaoFactory extends DaoFactory {
+    private DataSource dataSource = ConnectionPoolHolder.getDataSource();
+
     @Override
     public UserDao createUserDao() {
         return new JDBCUserDao(getConnection());
@@ -28,7 +31,6 @@ public class JDBCDaoFactory extends DaoFactory {
     }
 
 
-    private DataSource dataSource = ConnectionPoolHolder.getDataSource();
 
     private Connection getConnection(){
         try {

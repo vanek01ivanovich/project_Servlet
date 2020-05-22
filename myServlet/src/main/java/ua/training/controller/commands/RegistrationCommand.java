@@ -22,15 +22,20 @@ public class RegistrationCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response){
         String userName = request.getParameter("userName");
 
-        if (request.getMethod().equalsIgnoreCase("post")){
-           if(!(userService.isExistUser(userName)) && request.getAttribute("regexFalseOrTrue").equals("true")){
-               userService.saveNewUser(request);
-               request.setAttribute("redirect","/login");
-               return null;
-           }else{
-               request.setAttribute("alert",0);
-               return "WEB-INF/view/registration.jsp";
-           }
+        if (request.getMethod().equalsIgnoreCase("post")) {
+
+            if ((userService.isExistUser(userName))) {
+                request.setAttribute("alert", 0);
+                return "WEB-INF/view/registration.jsp";
+            } else if (request.getAttribute("regexFalseOrTrue").equals("false")) {
+                request.setAttribute("alert", 1);
+                return "WEB-INF/view/registration.jsp";
+            } else {
+                userService.saveNewUser(request);
+                request.setAttribute("redirect", "/login");
+                return null;
+            }
+
         }else {
             return "WEB-INF/view/registration.jsp";
         }
